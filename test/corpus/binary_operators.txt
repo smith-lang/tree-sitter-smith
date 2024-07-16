@@ -1,0 +1,163 @@
+==================
+Addition and multiplication
+==================
+
+2 + 3 * 4
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (int))
+      right: (expression
+        (binary_expression
+          left: (expression
+            (int))
+          right: (expression
+            (int)))))))
+
+==================
+Multiplication and addition
+==================
+
+2 * 3 + 4
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (binary_expression
+          left: (expression
+            (int))
+          right: (expression
+            (int))))
+      right: (expression
+        (int)))))
+
+==================
+Multiple operations
+==================
+
+2 + 3 * 4 - 5 / 2
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (binary_expression
+          left: (expression
+            (int))
+          right: (expression
+            (binary_expression
+              left: (expression
+                (int))
+              right: (expression
+                (int))))))
+      right: (expression
+        (binary_expression
+          left: (expression
+            (int))
+          right: (expression
+            (int)))))))
+
+==================
+Parentheses overriding precedence
+==================
+
+(2 + 3) * 4
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (parenthesized_expression
+          (expression
+            (binary_expression
+              left: (expression
+                (int))
+              right: (expression
+                (int))))))
+      right: (expression
+        (int)))))
+
+==================
+Mixed operators with floats
+==================
+
+1.5 * 2.0 + 3.5 / 0.5 - 1.0
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (binary_expression
+          left: (expression
+            (binary_expression
+              left: (expression
+                (float))
+              right: (expression
+                (float))))
+          right: (expression
+            (binary_expression
+              left: (expression
+                (float))
+              right: (expression
+                (float))))))
+      right: (expression
+        (float)))))
+
+==================
+Unary operator with multiplication
+==================
+
+-2 * 3
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (unary_expression
+          (expression
+            (int))))
+      right: (expression
+        (int)))))
+
+==================
+Nested parentheses
+==================
+
+((2 + 3) * 4) + 5
+
+---
+
+(source_file
+  (expression
+    (binary_expression
+      left: (expression
+        (parenthesized_expression
+          (expression
+            (binary_expression
+              left: (expression
+                (parenthesized_expression
+                  (expression
+                    (binary_expression
+                      left: (expression
+                        (int))
+                      right: (expression
+                        (int))))))
+              right: (expression
+                (int))))))
+      right: (expression
+        (int)))))

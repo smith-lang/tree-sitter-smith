@@ -1,0 +1,188 @@
+==================
+Function definition with no parameters
+==================
+
+fn main() -> i32 {
+    42
+}
+
+---
+
+(source_file
+    (expression
+        (function_definition
+            name: (identifier)
+            parameters: (parameter_list)
+            return_type: (type
+                (identifier))
+            body: (block
+                (expression
+                    (int))))))
+
+==================
+Function definition with one parameter
+==================
+
+fn id(x: i32) -> i32 {
+    x
+}
+
+---
+
+(source_file
+    (expression
+        (function_definition
+            name: (identifier)
+            parameters: (parameter_list
+                (parameter
+                    name: (identifier)
+                    type: (type
+                        (identifier))))
+            return_type: (type
+                (identifier))
+            body: (block
+                (expression
+                    (identifier))))))
+
+==================
+Function definition with two parameters
+==================
+
+fn add(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+---
+
+(source_file
+  (expression
+    (function_definition
+      name: (identifier)
+      parameters: (parameter_list
+        (parameter
+          name: (identifier)
+          type: (type
+            (identifier)))
+        (parameter
+          name: (identifier)
+          type: (type
+            (identifier))))
+      return_type: (type
+        (identifier))
+      body: (block
+        (expression
+          (binary_expression
+            left: (expression
+              (identifier))
+            right: (expression
+              (identifier))))))))
+
+==================
+Generic function definition with one type parameter
+==================
+
+fn identity[T](x: T) -> T {
+    x
+}
+
+---
+
+(source_file
+  (expression
+    (function_definition
+      name: (identifier)
+      type_parameters: (type_parameter_list
+        (type_parameter
+          (identifier)))
+      parameters: (parameter_list
+        (parameter
+          name: (identifier)
+          type: (type
+            (identifier))))
+      return_type: (type
+        (identifier))
+      body: (block
+        (expression
+          (identifier))))))
+
+==================
+Generic function definition with two type parameters
+==================
+
+fn first[T, U](x: T, y: U) -> T {
+    x
+}
+
+---
+
+(source_file
+  (expression
+    (function_definition
+      name: (identifier)
+      type_parameters: (type_parameter_list
+        (type_parameter
+          (identifier))
+        (type_parameter
+          (identifier)))
+      parameters: (parameter_list
+        (parameter
+          name: (identifier)
+          type: (type
+            (identifier)))
+        (parameter
+          name: (identifier)
+          type: (type
+            (identifier))))
+      return_type: (type
+        (identifier))
+      body: (block
+        (expression
+          (identifier))))))
+
+==================
+Function call with no arguments
+==================
+
+main()
+
+---
+
+(source_file
+  (expression
+    (function_call
+      name: (identifier)
+      arguments: (argument_list))))
+
+==================
+Function call with one argument
+==================
+
+id(42)
+
+---
+
+(source_file
+  (expression
+    (function_call
+      name: (identifier)
+      arguments: (argument_list
+        (expression
+          (int))))))
+
+==================
+Function call with two arguments
+==================
+
+add(5, 3)
+
+---
+
+(source_file
+  (expression
+    (function_call
+      name: (identifier)
+      arguments: (argument_list
+        (expression
+          (int))
+        (expression
+          (int))))))

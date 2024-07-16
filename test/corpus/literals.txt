@@ -1,0 +1,103 @@
+==================
+positive int
+==================
+
+42
+
+---
+
+(source_file
+    (expression
+        (int)))
+
+==================
+negative int
+==================
+
+-42
+
+---
+
+(source_file
+  (expression
+    (unary_expression
+        (expression
+            (int)))))
+
+==================
+positive float
+==================
+
+3.14
+
+---
+
+(source_file
+    (expression
+        (float)))
+
+==================
+negative float
+==================
+
+-3.14
+
+---
+
+(source_file
+    (expression
+        (unary_expression
+            (expression
+                (float)))))
+
+==================
+string
+==================
+
+"Hello, World!"
+
+---
+
+(source_file
+    (expression
+        (string)))
+
+==================
+boolean true
+==================
+
+true
+
+---
+
+(source_file
+    (expression
+        (boolean)))
+
+==================
+boolean false
+==================
+
+false
+
+---
+
+(source_file
+    (expression
+        (boolean)))
+
+==================
+nested unary
+==================
+
+--42
+
+---
+
+(source_file
+    (expression
+        (unary_expression
+            (expression
+                (unary_expression
+                    (expression
+                         (int)))))))
