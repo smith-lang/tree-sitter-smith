@@ -1,6 +1,8 @@
 module.exports = grammar({
   name: "smith",
 
+  word: ($) => $.identifier,
+
   rules: {
     source_file: ($) => repeat($.expression),
 
@@ -21,10 +23,11 @@ module.exports = grammar({
     binary_expression: ($) =>
       choice(
         ...[
-          ["+", 1],
-          ["-", 1],
-          ["*", 2],
-          ["/", 2],
+          [">", 1],
+          ["+", 2],
+          ["-", 2],
+          ["*", 3],
+          ["/", 3],
         ].map(([operator, precedence]) =>
           prec.left(
             precedence,
@@ -37,7 +40,8 @@ module.exports = grammar({
         ),
       ),
 
-    unary_expression: ($) => prec(3, seq("-", $.expression)),
+    unary_expression: ($) =>
+      prec(4, choice(seq("-", $.expression), seq("not", $.expression))),
 
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
 
