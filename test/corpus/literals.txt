@@ -101,3 +101,70 @@ nested unary
                 (unary_expression
                     (expression
                          (int)))))))
+
+
+==================
+not operator
+==================
+
+not true
+
+---
+
+(source_file
+    (expression
+        (unary_expression
+            (expression
+                (boolean)))))
+
+==================
+not operator with parentheses
+==================
+
+not (5 > 3)
+
+---
+
+(source_file
+    (expression
+        (unary_expression
+            (expression
+                (parenthesized_expression
+                    (expression
+                        (binary_expression
+                            left: (expression
+                                (int))
+                            right: (expression
+                                (int)))))))))
+
+==================
+nested not operator
+==================
+
+not not false
+
+---
+
+(source_file
+    (expression
+        (unary_expression
+            (expression
+                (unary_expression
+                    (expression
+                        (boolean)))))))
+
+==================
+not operator with function call
+==================
+
+not is_valid()
+
+---
+
+(source_file
+    (expression
+        (unary_expression
+            (expression
+                (function_call
+                    name: (identifier)
+                    arguments: (argument_list))))))

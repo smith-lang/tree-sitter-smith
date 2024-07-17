@@ -47,6 +47,10 @@
           {
             "type": "/",
             "named": false
+          },
+          {
+            "type": ">",
+            "named": false
           }
         ]
       },
@@ -383,6 +387,10 @@
     "named": false
   },
   {
+    "type": ">",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -409,6 +417,10 @@
   {
     "type": "int",
     "named": true
+  },
+  {
+    "type": "not",
+    "named": false
   },
   {
     "type": "string",
