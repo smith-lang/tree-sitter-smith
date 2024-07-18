@@ -7,15 +7,15 @@ Addition and multiplication
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
+  (expr
+    (binary_op
+      left: (expr
         (int))
-      right: (expression
-        (binary_expression
-          left: (expression
+      right: (expr
+        (binary_op
+          left: (expr
             (int))
-          right: (expression
+          right: (expr
             (int)))))))
 
 ==================
@@ -27,15 +27,15 @@ Multiplication and addition
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
-        (binary_expression
-          left: (expression
+  (expr
+    (binary_op
+      left: (expr
+        (binary_op
+          left: (expr
             (int))
-          right: (expression
+          right: (expr
             (int))))
-      right: (expression
+      right: (expr
         (int)))))
 
 ==================
@@ -47,23 +47,23 @@ Multiple operations
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
-        (binary_expression
-          left: (expression
+  (expr
+    (binary_op
+      left: (expr
+        (binary_op
+          left: (expr
             (int))
-          right: (expression
-            (binary_expression
-              left: (expression
+          right: (expr
+            (binary_op
+              left: (expr
                 (int))
-              right: (expression
+              right: (expr
                 (int))))))
-      right: (expression
-        (binary_expression
-          left: (expression
+      right: (expr
+        (binary_op
+          left: (expr
             (int))
-          right: (expression
+          right: (expr
             (int)))))))
 
 ==================
@@ -75,17 +75,17 @@ Parentheses overriding precedence
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
-        (parenthesized_expression
-          (expression
-            (binary_expression
-              left: (expression
+  (expr
+    (binary_op
+      left: (expr
+        (paren
+          (expr
+            (binary_op
+              left: (expr
                 (int))
-              right: (expression
+              right: (expr
                 (int))))))
-      right: (expression
+      right: (expr
         (int)))))
 
 ==================
@@ -97,23 +97,23 @@ Mixed operators with floats
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
-        (binary_expression
-          left: (expression
-            (binary_expression
-              left: (expression
+  (expr
+    (binary_op
+      left: (expr
+        (binary_op
+          left: (expr
+            (binary_op
+              left: (expr
                 (float))
-              right: (expression
+              right: (expr
                 (float))))
-          right: (expression
-            (binary_expression
-              left: (expression
+          right: (expr
+            (binary_op
+              left: (expr
                 (float))
-              right: (expression
+              right: (expr
                 (float))))))
-      right: (expression
+      right: (expr
         (float)))))
 
 ==================
@@ -125,13 +125,13 @@ Unary operator with multiplication
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
-        (unary_expression
-          (expression
+  (expr
+    (binary_op
+      left: (expr
+        (unary_op
+          (expr
             (int))))
-      right: (expression
+      right: (expr
         (int)))))
 
 ==================
@@ -143,21 +143,21 @@ Nested parentheses
 ---
 
 (source_file
-  (expression
-    (binary_expression
-      left: (expression
-        (parenthesized_expression
-          (expression
-            (binary_expression
-              left: (expression
-                (parenthesized_expression
-                  (expression
-                    (binary_expression
-                      left: (expression
+  (expr
+    (binary_op
+      left: (expr
+        (paren
+          (expr
+            (binary_op
+              left: (expr
+                (paren
+                  (expr
+                    (binary_op
+                      left: (expr
                         (int))
-                      right: (expression
+                      right: (expr
                         (int))))))
-              right: (expression
+              right: (expr
                 (int))))))
-      right: (expression
+      right: (expr
         (int)))))
