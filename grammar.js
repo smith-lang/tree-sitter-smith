@@ -1,26 +1,27 @@
 module.exports = grammar({
   name: "smith",
 
-  word: ($) => $.identifier,
+  word: ($) => $.symbol,
 
   rules: {
-    source_file: ($) => repeat($.expression),
+    source_file: ($) => repeat($.expr),
 
-    expression: ($) =>
+    expr: ($) =>
       choice(
-        $.binary_expression,
-        $.unary_expression,
-        $.parenthesized_expression,
+        $.binary_op,
+        $.unary_op,
+        $.paren,
         $.int,
         $.float,
-        $.string,
-        $.boolean,
-        $.function_definition,
-        $.function_call,
-        $.identifier,
+        $.str,
+        $.bool,
+        $.fn,
+        $.call,
+        $.symbol,
+        $.def,
       ),
 
-    binary_expression: ($) =>
+    binary_op: ($) =>
       choice(
         ...[
           [">", 1],
@@ -32,70 +33,57 @@ module.exports = grammar({
           prec.left(
             precedence,
             seq(
-              field("left", $.expression),
+              field("left", $.expr),
               field("operator", operator),
-              field("right", $.expression),
+              field("right", $.expr),
             ),
           ),
         ),
       ),
 
-    unary_expression: ($) =>
-      prec(4, choice(seq("-", $.expression), seq("not", $.expression))),
+    unary_op: ($) => prec(4, choice(seq("-", $.expr), seq("not", $.expr))),
 
-    parenthesized_expression: ($) => seq("(", $.expression, ")"),
+    paren: ($) => seq("(", $.expr, ")"),
 
     int: ($) => /[0-9]+/,
 
     float: ($) => /[0-9]+\.[0-9]+/,
 
-    string: ($) => /"[^"]*"/,
+    str: ($) => /"[^"]*"/,
 
-    boolean: ($) => choice("true", "false"),
+    bool: ($) => choice("true", "false"),
 
-    identifier: ($) => /[a-zA-Z_]\w*/,
+    symbol: ($) => /[a-zA-Z_]\w*/,
 
-    type: ($) => $.identifier,
+    param: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
 
-    parameter: ($) =>
-      seq(field("name", $.identifier), ":", field("type", $.type)),
+    params: ($) =>
+      seq("(", optional(seq($.param, repeat(seq(",", $.param)))), ")"),
 
-    parameter_list: ($) =>
-      seq("(", optional(seq($.parameter, repeat(seq(",", $.parameter)))), ")"),
+    block: ($) => seq("{", repeat($.expr), "}"),
 
-    type_parameter: ($) => $.identifier,
-
-    type_parameter_list: ($) =>
-      seq(
-        "[",
-        optional(seq($.type_parameter, repeat(seq(",", $.type_parameter)))),
-        "]",
-      ),
-
-    block: ($) => seq("{", repeat($.expression), "}"),
-
-    function_definition: ($) =>
+    fn: ($) =>
       seq(
         "fn",
-        field("name", $.identifier),
-        optional(field("type_parameters", $.type_parameter_list)),
-        field("parameters", $.parameter_list),
+        field("params", $.params),
         "->",
-        field("return_type", $.type),
+        field("return_type", $.expr),
         field("body", $.block),
       ),
 
-    argument_list: ($) =>
-      seq(
-        "(",
-        optional(seq($.expression, repeat(seq(",", $.expression)))),
-        ")",
-      ),
+    args: ($) => seq("(", optional(seq($.expr, repeat(seq(",", $.expr)))), ")"),
 
-    function_call: ($) =>
-      prec(
-        5,
-        seq(field("name", $.identifier), field("arguments", $.argument_list)),
+    call: ($) => prec(5, seq(field("name", $.symbol), field("args", $.args))),
+
+    def: ($) =>
+      prec.right(
+        6,
+        seq(
+          field("name", $.symbol),
+          optional(seq(":", field("type", $.expr))),
+          "=",
+          field("value", $.expr),
+        ),
       ),
   },
 });

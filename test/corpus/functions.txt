@@ -1,146 +1,122 @@
 ==================
-Function definition with no parameters
+Function definition with no params
 ==================
 
-fn main() -> i32 {
+main = fn() -> i32 {
     42
 }
 
 ---
 
 (source_file
-    (expression
-        (function_definition
-            name: (identifier)
-            parameters: (parameter_list)
-            return_type: (type
-                (identifier))
-            body: (block
-                (expression
-                    (int))))))
+    (expr
+        (def
+            name: (symbol)
+            value: (expr
+                (fn
+                    params: (params)
+                    return_type: (expr
+                        (symbol))
+                    body: (block
+                        (expr
+                            (int))))))))
 
 ==================
 Function definition with one parameter
 ==================
 
-fn id(x: i32) -> i32 {
+id = fn(x: i32) -> i32 {
     x
 }
 
 ---
 
 (source_file
-    (expression
-        (function_definition
-            name: (identifier)
-            parameters: (parameter_list
-                (parameter
-                    name: (identifier)
-                    type: (type
-                        (identifier))))
-            return_type: (type
-                (identifier))
-            body: (block
-                (expression
-                    (identifier))))))
+    (expr
+        (def
+            name: (symbol)
+            value: (expr
+                (fn
+                    params: (params
+                        (param
+                            name: (symbol)
+                            type: (expr
+                                (symbol))))
+                    return_type: (expr
+                        (symbol))
+                    body: (block
+                        (expr
+                            (symbol))))))))
 
 ==================
-Function definition with two parameters
+Function definition with two params
 ==================
 
-fn add(x: i32, y: i32) -> i32 {
+add = fn(x: i32, y: i32) -> i32 {
     x + y
 }
 
 ---
 
 (source_file
-  (expression
-    (function_definition
-      name: (identifier)
-      parameters: (parameter_list
-        (parameter
-          name: (identifier)
-          type: (type
-            (identifier)))
-        (parameter
-          name: (identifier)
-          type: (type
-            (identifier))))
-      return_type: (type
-        (identifier))
-      body: (block
-        (expression
-          (binary_expression
-            left: (expression
-              (identifier))
-            right: (expression
-              (identifier))))))))
+  (expr
+    (def
+      name: (symbol)
+      value: (expr
+        (fn
+            params: (params
+                (param
+                    name: (symbol)
+                    type: (expr
+                        (symbol)))
+                (param
+                    name: (symbol)
+                    type: (expr
+                        (symbol))))
+            return_type: (expr
+                (symbol))
+            body: (block
+                (expr
+                    (binary_op
+                        left: (expr
+                            (symbol))
+                        right: (expr
+                            (symbol))))))))))
 
 ==================
 Generic function definition with one type parameter
 ==================
 
-fn identity[T](x: T) -> T {
+id = fn(T: type, x: T) -> T {
     x
 }
 
 ---
 
 (source_file
-  (expression
-    (function_definition
-      name: (identifier)
-      type_parameters: (type_parameter_list
-        (type_parameter
-          (identifier)))
-      parameters: (parameter_list
-        (parameter
-          name: (identifier)
-          type: (type
-            (identifier))))
-      return_type: (type
-        (identifier))
-      body: (block
-        (expression
-          (identifier))))))
+  (expr
+    (def
+        name: (symbol)
+        value: (expr
+            (fn
+                params: (params
+                    (param
+                        name: (symbol)
+                        type: (expr
+                            (symbol)))
+                    (param
+                        name: (symbol)
+                        type: (expr
+                            (symbol))))
+                return_type: (expr
+                    (symbol))
+                body: (block
+                    (expr
+                        (symbol))))))))
+
 
 ==================
-Generic function definition with two type parameters
-==================
-
-fn first[T, U](x: T, y: U) -> T {
-    x
-}
-
----
-
-(source_file
-  (expression
-    (function_definition
-      name: (identifier)
-      type_parameters: (type_parameter_list
-        (type_parameter
-          (identifier))
-        (type_parameter
-          (identifier)))
-      parameters: (parameter_list
-        (parameter
-          name: (identifier)
-          type: (type
-            (identifier)))
-        (parameter
-          name: (identifier)
-          type: (type
-            (identifier))))
-      return_type: (type
-        (identifier))
-      body: (block
-        (expression
-          (identifier))))))
-
-==================
-Function call with no arguments
+Function call with no args
 ==================
 
 main()
@@ -148,10 +124,10 @@ main()
 ---
 
 (source_file
-  (expression
-    (function_call
-      name: (identifier)
-      arguments: (argument_list))))
+  (expr
+    (call
+      name: (symbol)
+      args: (args))))
 
 ==================
 Function call with one argument
@@ -162,15 +138,15 @@ id(42)
 ---
 
 (source_file
-  (expression
-    (function_call
-      name: (identifier)
-      arguments: (argument_list
-        (expression
+  (expr
+    (call
+      name: (symbol)
+      args: (args
+        (expr
           (int))))))
 
 ==================
-Function call with two arguments
+Function call with two args
 ==================
 
 add(5, 3)
@@ -178,11 +154,11 @@ add(5, 3)
 ---
 
 (source_file
-  (expression
-    (function_call
-      name: (identifier)
-      arguments: (argument_list
-        (expression
+  (expr
+    (call
+      name: (symbol)
+      args: (args
+        (expr
           (int))
-        (expression
+        (expr
           (int))))))

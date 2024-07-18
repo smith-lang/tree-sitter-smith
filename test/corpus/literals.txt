@@ -7,7 +7,7 @@ positive int
 ---
 
 (source_file
-    (expression
+    (expr
         (int)))
 
 ==================
@@ -19,9 +19,9 @@ negative int
 ---
 
 (source_file
-  (expression
-    (unary_expression
-        (expression
+  (expr
+    (unary_op
+        (expr
             (int)))))
 
 ==================
@@ -33,7 +33,7 @@ positive float
 ---
 
 (source_file
-    (expression
+    (expr
         (float)))
 
 ==================
@@ -45,9 +45,9 @@ negative float
 ---
 
 (source_file
-    (expression
-        (unary_expression
-            (expression
+    (expr
+        (unary_op
+            (expr
                 (float)))))
 
 ==================
@@ -59,8 +59,8 @@ string
 ---
 
 (source_file
-    (expression
-        (string)))
+    (expr
+        (str)))
 
 ==================
 boolean true
@@ -71,8 +71,8 @@ true
 ---
 
 (source_file
-    (expression
-        (boolean)))
+    (expr
+        (bool)))
 
 ==================
 boolean false
@@ -83,8 +83,8 @@ false
 ---
 
 (source_file
-    (expression
-        (boolean)))
+    (expr
+        (bool)))
 
 ==================
 nested unary
@@ -95,11 +95,11 @@ nested unary
 ---
 
 (source_file
-    (expression
-        (unary_expression
-            (expression
-                (unary_expression
-                    (expression
+    (expr
+        (unary_op
+            (expr
+                (unary_op
+                    (expr
                          (int)))))))
 
 
@@ -112,10 +112,10 @@ not true
 ---
 
 (source_file
-    (expression
-        (unary_expression
-            (expression
-                (boolean)))))
+    (expr
+        (unary_op
+            (expr
+                (bool)))))
 
 ==================
 not operator with parentheses
@@ -126,15 +126,15 @@ not (5 > 3)
 ---
 
 (source_file
-    (expression
-        (unary_expression
-            (expression
-                (parenthesized_expression
-                    (expression
-                        (binary_expression
-                            left: (expression
+    (expr
+        (unary_op
+            (expr
+                (paren
+                    (expr
+                        (binary_op
+                            left: (expr
                                 (int))
-                            right: (expression
+                            right: (expr
                                 (int)))))))))
 
 ==================
@@ -146,12 +146,12 @@ not not false
 ---
 
 (source_file
-    (expression
-        (unary_expression
-            (expression
-                (unary_expression
-                    (expression
-                        (boolean)))))))
+    (expr
+        (unary_op
+            (expr
+                (unary_op
+                    (expr
+                        (bool)))))))
 
 ==================
 not operator with function call
@@ -162,9 +162,9 @@ not is_valid()
 ---
 
 (source_file
-    (expression
-        (unary_expression
-            (expression
-                (function_call
-                    name: (identifier)
-                    arguments: (argument_list))))))
+    (expr
+        (unary_op
+            (expr
+                (call
+                    name: (symbol)
+                    args: (args))))))
