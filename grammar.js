@@ -57,23 +57,28 @@ module.exports = grammar({
 
     param: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
 
-    params: ($) =>
-      seq("(", optional(seq($.param, repeat(seq(",", $.param)))), ")"),
+    params: ($) => seq($.param, repeat(seq(",", $.param))),
 
     block: ($) => seq("{", repeat($.expr), "}"),
 
     fn: ($) =>
       seq(
         "fn",
-        field("params", $.params),
+        "(",
+        optional(field("params", $.params)),
+        ")",
         "->",
         field("return_type", $.expr),
         field("body", $.block),
       ),
 
-    args: ($) => seq("(", optional(seq($.expr, repeat(seq(",", $.expr)))), ")"),
+    args: ($) => seq($.expr, repeat(seq(",", $.expr))),
 
-    call: ($) => prec(5, seq(field("name", $.symbol), field("args", $.args))),
+    call: ($) =>
+      prec(
+        5,
+        seq(field("name", $.symbol), "(", optional(field("args", $.args)), ")"),
+      ),
 
     def: ($) =>
       prec.right(

@@ -5,7 +5,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "expr",
@@ -92,7 +92,7 @@
     "fields": {
       "args": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "args",
@@ -219,7 +219,7 @@
       },
       "params": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "params",
@@ -271,7 +271,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "param",
