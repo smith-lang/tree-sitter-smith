@@ -19,6 +19,7 @@ module.exports = grammar({
         $.call,
         $.symbol,
         $.def,
+        $.struct,
       ),
 
     binary_op: ($) =>
@@ -45,15 +46,15 @@ module.exports = grammar({
 
     paren: ($) => seq("(", $.expr, ")"),
 
-    int: ($) => /[0-9]+/,
+    int: () => /[0-9]+/,
 
-    float: ($) => /[0-9]+\.[0-9]+/,
+    float: () => /[0-9]+\.[0-9]+/,
 
-    str: ($) => /"[^"]*"/,
+    str: () => /"[^"]*"/,
 
-    bool: ($) => choice("true", "false"),
+    bool: () => choice("true", "false"),
 
-    symbol: ($) => /[a-zA-Z_]\w*/,
+    symbol: () => /[a-zA-Z_]\w*/,
 
     param: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
 
@@ -90,5 +91,11 @@ module.exports = grammar({
           field("value", $.expr),
         ),
       ),
+
+    field: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
+
+    fields: ($) => seq($.field, repeat(seq(",", $.field)), optional(",")),
+
+    struct: ($) => seq("struct", "{", optional($.fields), "}"),
   },
 });
