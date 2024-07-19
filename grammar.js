@@ -83,7 +83,7 @@ module.exports = grammar({
 
     def: ($) =>
       prec.right(
-        6,
+        1,
         seq(
           field("name", $.symbol),
           optional(seq(":", field("type", $.expr))),
