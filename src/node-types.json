@@ -100,12 +100,12 @@
           }
         ]
       },
-      "name": {
+      "fn": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "symbol",
+            "type": "expr",
             "named": true
           }
         ]

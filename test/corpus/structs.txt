@@ -93,15 +93,16 @@ Slice = fn(T: type) -> type {
                         (expr
                         (struct
                             (fields
-                            (field
-                                name: (symbol)
-                                type: (expr
-                                (call
+                                (field
                                     name: (symbol)
-                                    args: (args
-                                    (expr
-                                        (symbol))))))
-                            (field
-                                name: (symbol)
-                                type: (expr
-                                (symbol))))))))))))
+                                    type: (expr
+                                        (call
+                                            fn: (expr
+                                                (symbol))
+                                            args: (args
+                                                (expr
+                                                    (symbol))))))
+                                (field
+                                    name: (symbol)
+                                    type: (expr
+                                        (symbol))))))))))))

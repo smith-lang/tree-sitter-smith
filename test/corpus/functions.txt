@@ -125,7 +125,8 @@ main()
 (source_file
   (expr
     (call
-      name: (symbol))))
+      fn: (expr
+        (symbol)))))
 
 ==================
 Function call with one argument
@@ -138,7 +139,8 @@ id(42)
 (source_file
   (expr
     (call
-      name: (symbol)
+      fn: (expr
+        (symbol))
       args: (args
         (expr
           (int))))))
@@ -154,7 +156,8 @@ add(5, 3)
 (source_file
   (expr
     (call
-      name: (symbol)
+      fn: (expr
+        (symbol))
       args: (args
         (expr
           (int))

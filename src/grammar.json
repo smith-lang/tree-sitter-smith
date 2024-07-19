@@ -469,10 +469,10 @@
         "members": [
           {
             "type": "FIELD",
-            "name": "name",
+            "name": "fn",
             "content": {
               "type": "SYMBOL",
-              "name": "symbol"
+              "name": "expr"
             }
           },
           {

@@ -78,7 +78,7 @@ module.exports = grammar({
     call: ($) =>
       prec(
         5,
-        seq(field("name", $.symbol), "(", optional(field("args", $.args)), ")"),
+        seq(field("fn", $.expr), "(", optional(field("args", $.args)), ")"),
       ),
 
     def: ($) =>

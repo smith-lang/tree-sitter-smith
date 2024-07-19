@@ -166,4 +166,5 @@ not is_valid()
         (unary_op
             (expr
                 (call
-                    name: (symbol))))))
+                    fn: (expr
+                        (symbol)))))))
