@@ -504,7 +504,7 @@
     },
     "def": {
       "type": "PREC_RIGHT",
-      "value": 6,
+      "value": 1,
       "content": {
         "type": "SEQ",
         "members": [
