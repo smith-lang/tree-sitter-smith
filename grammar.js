@@ -19,6 +19,7 @@ module.exports = grammar({
         $.call,
         $.symbol,
         $.def,
+        $.struct,
       ),
 
     binary_op: ($) =>
@@ -45,35 +46,40 @@ module.exports = grammar({
 
     paren: ($) => seq("(", $.expr, ")"),
 
-    int: ($) => /[0-9]+/,
+    int: () => /[0-9]+/,
 
-    float: ($) => /[0-9]+\.[0-9]+/,
+    float: () => /[0-9]+\.[0-9]+/,
 
-    str: ($) => /"[^"]*"/,
+    str: () => /"[^"]*"/,
 
-    bool: ($) => choice("true", "false"),
+    bool: () => choice("true", "false"),
 
-    symbol: ($) => /[a-zA-Z_]\w*/,
+    symbol: () => /[a-zA-Z_]\w*/,
 
     param: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
 
-    params: ($) =>
-      seq("(", optional(seq($.param, repeat(seq(",", $.param)))), ")"),
+    params: ($) => seq($.param, repeat(seq(",", $.param))),
 
     block: ($) => seq("{", repeat($.expr), "}"),
 
     fn: ($) =>
       seq(
         "fn",
-        field("params", $.params),
+        "(",
+        optional(field("params", $.params)),
+        ")",
         "->",
         field("return_type", $.expr),
         field("body", $.block),
       ),
 
-    args: ($) => seq("(", optional(seq($.expr, repeat(seq(",", $.expr)))), ")"),
+    args: ($) => seq($.expr, repeat(seq(",", $.expr))),
 
-    call: ($) => prec(5, seq(field("name", $.symbol), field("args", $.args))),
+    call: ($) =>
+      prec(
+        5,
+        seq(field("fn", $.expr), "(", optional(field("args", $.args)), ")"),
+      ),
 
     def: ($) =>
       prec.right(
@@ -85,5 +91,11 @@ module.exports = grammar({
           field("value", $.expr),
         ),
       ),
+
+    field: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
+
+    fields: ($) => seq($.field, repeat(seq(",", $.field)), optional(",")),
+
+    struct: ($) => seq("struct", "{", optional($.fields), "}"),
   },
 });

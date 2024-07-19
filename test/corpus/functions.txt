@@ -14,7 +14,6 @@ main = fn() -> i32 {
             name: (symbol)
             value: (expr
                 (fn
-                    params: (params)
                     return_type: (expr
                         (symbol))
                     body: (block
@@ -126,8 +125,8 @@ main()
 (source_file
   (expr
     (call
-      name: (symbol)
-      args: (args))))
+      fn: (expr
+        (symbol)))))
 
 ==================
 Function call with one argument
@@ -140,7 +139,8 @@ id(42)
 (source_file
   (expr
     (call
-      name: (symbol)
+      fn: (expr
+        (symbol))
       args: (args
         (expr
           (int))))))
@@ -156,7 +156,8 @@ add(5, 3)
 (source_file
   (expr
     (call
-      name: (symbol)
+      fn: (expr
+        (symbol))
       args: (args
         (expr
           (int))
