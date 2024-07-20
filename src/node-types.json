@@ -66,6 +66,10 @@
           {
             "type": ">",
             "named": false
+          },
+          {
+            "type": "|",
+            "named": false
           }
         ]
       },
@@ -473,9 +477,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "array",
+          "named": true
+        },
         {
           "type": "expr",
           "named": true
@@ -524,6 +532,10 @@
     "named": false
   },
   {
+    "type": "?",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -569,6 +581,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
     "named": false
   },
   {

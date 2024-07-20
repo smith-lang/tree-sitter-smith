@@ -1,0 +1,163 @@
+==================
+primitive type
+==================
+
+i32
+
+---
+
+(source_file
+    (expr
+        (symbol)))
+
+==================
+pointer type
+==================
+
+*i32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (expr
+                (symbol)))))
+
+==================
+optional type
+==================
+
+?i32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (expr
+                (symbol)))))
+
+==================
+array type
+==================
+
+[]i32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (array)
+            (expr
+                (symbol)))))
+
+==================
+sized array type
+==================
+
+[5]i32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (array
+                (expr
+                    (int)))
+            (expr
+                (symbol)))))
+
+==================
+map type
+==================
+
+[str]i32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (array
+                (expr
+                    (symbol)))
+            (expr
+                (symbol)))))
+
+==================
+union type
+==================
+
+i32 | str
+
+---
+
+(source_file
+    (expr
+        (binary_op
+            left: (expr
+                (symbol))
+            right: (expr
+                (symbol)))))
+
+
+==================
+2d array type
+==================
+
+[][]f32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (array)
+            (expr
+                (unary_op
+                    (array)
+                    (expr
+                        (symbol)))))))
+
+==================
+array of map type
+==================
+
+[][str]f32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (array)
+            (expr
+                (unary_op
+                    (array
+                        (expr
+                            (symbol)))
+                    (expr
+                        (symbol)))))))
+
+==================
+map of array type
+==================
+
+[str][]f32
+
+---
+
+(source_file
+    (expr
+        (unary_op
+            (array
+                (expr
+                    (symbol)))
+            (expr
+                (unary_op
+                    (array)
+                    (expr
+                        (symbol)))))))

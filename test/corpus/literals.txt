@@ -308,7 +308,7 @@ map with two key value pairs
 map with trailing comma
 ==================
 
-{ name: "joe", age: 21 }
+{ name: "joe", age: 21, }
 
 ---
 
