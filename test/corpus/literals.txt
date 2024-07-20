@@ -253,3 +253,74 @@ nested array literal
                         (int))
                     (expr
                         (int)))))))
+
+==================
+empty map
+==================
+
+{}
+
+---
+
+(source_file
+    (expr
+        (map)))
+
+==================
+map with one key value pair
+==================
+
+{ x: 42 }
+
+---
+
+(source_file
+    (expr
+        (map
+            (pairs
+                (pair
+                    key: (symbol)
+                    value: (expr
+                        (int)))))))
+
+==================
+map with two key value pairs
+==================
+
+{ name: "joe", age: 21 }
+
+---
+
+(source_file
+    (expr
+        (map
+            (pairs
+                (pair
+                    key: (symbol)
+                    value: (expr
+                        (str)))
+                (pair
+                    key: (symbol)
+                    value: (expr
+                        (int)))))))
+
+==================
+map with trailing comma
+==================
+
+{ name: "joe", age: 21 }
+
+---
+
+(source_file
+    (expr
+        (map
+            (pairs
+                (pair
+                    key: (symbol)
+                    value: (expr
+                        (str)))
+                (pair
+                    key: (symbol)
+                    value: (expr
+                        (int)))))))

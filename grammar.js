@@ -21,6 +21,7 @@ module.exports = grammar({
         $.def,
         $.struct,
         $.array,
+        $.map,
       ),
 
     binary_op: ($) =>
@@ -100,5 +101,11 @@ module.exports = grammar({
 
     array: ($) =>
       seq("[", optional($.expr), repeat(seq(",", $.expr)), optional(","), "]"),
+
+    pair: ($) => seq(field("key", $.symbol), ":", field("value", $.expr)),
+
+    pairs: ($) => seq($.pair, repeat(seq(",", $.pair)), optional(",")),
+
+    map: ($) => seq("{", optional($.pairs), "}"),
   },
 });
