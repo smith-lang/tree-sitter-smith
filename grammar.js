@@ -28,6 +28,7 @@ module.exports = grammar({
     binary_op: ($) =>
       choice(
         ...[
+          ["|", 1],
           [">", 1],
           ["+", 2],
           ["-", 2],
@@ -45,7 +46,17 @@ module.exports = grammar({
         ),
       ),
 
-    unary_op: ($) => prec(4, choice(seq("-", $.expr), seq("not", $.expr))),
+    unary_op: ($) =>
+      prec(
+        4,
+        choice(
+          seq("-", $.expr),
+          seq("not", $.expr),
+          seq("*", $.expr),
+          seq("?", $.expr),
+          seq($.array, $.expr),
+        ),
+      ),
 
     paren: ($) => seq("(", $.expr, ")"),
 
