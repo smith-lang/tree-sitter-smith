@@ -22,6 +22,7 @@ module.exports = grammar({
         $.struct,
         $.array,
         $.map,
+        $.tuple,
       ),
 
     binary_op: ($) =>
@@ -107,5 +108,12 @@ module.exports = grammar({
     pairs: ($) => seq($.pair, repeat(seq(",", $.pair)), optional(",")),
 
     map: ($) => seq("{", optional($.pairs), "}"),
+
+    tuple: ($) =>
+      seq(
+        "(",
+        optional(seq($.expr, ",", repeat(seq($.expr, optional(","))))),
+        ")",
+      ),
   },
 });

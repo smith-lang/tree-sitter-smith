@@ -224,6 +224,10 @@
           "named": true
         },
         {
+          "type": "tuple",
+          "named": true
+        },
+        {
           "type": "unary_op",
           "named": true
         }
@@ -444,6 +448,21 @@
       "types": [
         {
           "type": "fields",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expr",
           "named": true
         }
       ]
