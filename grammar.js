@@ -20,6 +20,7 @@ module.exports = grammar({
         $.symbol,
         $.def,
         $.struct,
+        $.array,
       ),
 
     binary_op: ($) =>
@@ -68,12 +69,11 @@ module.exports = grammar({
         "(",
         optional(field("params", $.params)),
         ")",
-        "->",
         field("return_type", $.expr),
         field("body", $.block),
       ),
 
-    args: ($) => seq($.expr, repeat(seq(",", $.expr))),
+    args: ($) => seq($.expr, repeat(seq(",", $.expr)), optional(",")),
 
     call: ($) =>
       prec(
@@ -97,5 +97,8 @@ module.exports = grammar({
     fields: ($) => seq($.field, repeat(seq(",", $.field)), optional(",")),
 
     struct: ($) => seq("struct", "{", optional($.fields), "}"),
+
+    array: ($) =>
+      seq("[", optional($.expr), repeat(seq(",", $.expr)), optional(","), "]"),
   },
 });

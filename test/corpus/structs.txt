@@ -64,10 +64,37 @@ Rectangle = struct {
 
 
 ==================
+Struct definition with trailing comma
+==================
+
+Rectangle = struct {
+    width: f32,
+    height: f32,
+}
+
+---
+
+(source_file
+    (expr
+        (def
+            name: (symbol)
+            value: (expr
+                (struct
+                    (fields
+                        (field
+                            name: (symbol)
+                            type: (expr
+                                (symbol)))
+                        (field
+                            name: (symbol)
+                            type: (expr
+                                (symbol)))))))))
+
+==================
 Generic struct definition with two fields
 ==================
 
-Slice = fn(T: type) -> type {
+Slice = fn(T: type) type {
     struct {
         data: ptr(T),
         len: usize,
