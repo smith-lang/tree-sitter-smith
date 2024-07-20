@@ -219,3 +219,23 @@ add(5, 3)
           (int))
         (expr
           (int))))))
+
+
+==================
+Function call with trailing comma
+==================
+
+add(5, 3,)
+
+---
+
+(source_file
+  (expr
+    (call
+      fn: (expr
+        (symbol))
+      args: (args
+        (expr
+          (int))
+        (expr
+          (int))))))

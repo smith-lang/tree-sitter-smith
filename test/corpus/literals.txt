@@ -168,3 +168,88 @@ not is_valid()
                 (call
                     fn: (expr
                         (symbol)))))))
+
+==================
+array literal with no elements
+==================
+
+[]
+
+---
+
+(source_file
+    (expr
+        (array)))
+
+
+==================
+array literal with one element
+==================
+
+[1]
+
+---
+
+(source_file
+    (expr
+        (array
+            (expr
+                (int)))))
+
+==================
+array literal with two elements
+==================
+
+[1, 2]
+
+---
+
+(source_file
+    (expr
+        (array
+            (expr
+                (int))
+            (expr
+                (int)))))
+
+==================
+array literal with trailing comma
+==================
+
+[1, 2, ]
+
+---
+
+(source_file
+    (expr
+        (array
+            (expr
+                (int))
+            (expr
+                (int)))))
+
+
+==================
+nested array literal
+==================
+
+[[1, 2,],
+ [3, 4,],]
+
+---
+
+(source_file
+    (expr
+        (array
+            (expr
+                (array
+                    (expr
+                        (int))
+                    (expr
+                        (int))))
+            (expr
+                (array
+                    (expr
+                        (int))
+                    (expr
+                        (int)))))))
