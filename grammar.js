@@ -68,7 +68,6 @@ module.exports = grammar({
         "(",
         optional(field("params", $.params)),
         ")",
-        "->",
         field("return_type", $.expr),
         field("body", $.block),
       ),

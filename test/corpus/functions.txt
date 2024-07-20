@@ -2,7 +2,7 @@
 Function definition with no params
 ==================
 
-main = fn() -> i32 {
+main = fn() i32 {
     42
 }
 
@@ -24,7 +24,7 @@ main = fn() -> i32 {
 Function definition with one parameter
 ==================
 
-id = fn(x: i32) -> i32 {
+id = fn(x: i32) i32 {
     x
 }
 
@@ -51,7 +51,7 @@ id = fn(x: i32) -> i32 {
 Function definition with two params
 ==================
 
-add = fn(x: i32, y: i32) -> i32 {
+add = fn(x: i32, y: i32) i32 {
     x + y
 }
 
@@ -86,7 +86,7 @@ add = fn(x: i32, y: i32) -> i32 {
 Generic function definition with one type parameter
 ==================
 
-id = fn(T: type, x: T) -> T {
+id = fn(T: type, x: T) T {
     x
 }
 
@@ -118,7 +118,7 @@ id = fn(T: type, x: T) -> T {
 Function definition with multiple line body
 ==================
 
-sum_of_squares = fn(x: i32, y: i32) -> i32 {
+sum_of_squares = fn(x: i32, y: i32) i32 {
     x2 = x * x
     y2 = y * y
     x2 + y2

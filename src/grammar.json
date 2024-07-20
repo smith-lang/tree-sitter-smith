@@ -415,10 +415,6 @@
           "value": ")"
         },
         {
-          "type": "STRING",
-          "value": "->"
-        },
-        {
           "type": "FIELD",
           "name": "return_type",
           "content": {

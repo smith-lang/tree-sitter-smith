@@ -67,7 +67,7 @@ Rectangle = struct {
 Generic struct definition with two fields
 ==================
 
-Slice = fn(T: type) -> type {
+Slice = fn(T: type) type {
     struct {
         data: ptr(T),
         len: usize,
