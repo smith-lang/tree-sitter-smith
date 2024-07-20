@@ -324,3 +324,61 @@ map with trailing comma
                     key: (symbol)
                     value: (expr
                         (int)))))))
+
+==================
+empty tuple
+==================
+
+()
+
+---
+
+(source_file
+    (expr
+        (tuple)))
+
+==================
+tuple with one element
+==================
+
+(42,)
+
+---
+
+(source_file
+    (expr
+        (tuple
+            (expr
+                (int)))))
+
+==================
+tuple with two elements
+==================
+
+(42, "joe")
+
+---
+
+(source_file
+    (expr
+        (tuple
+            (expr
+                (int))
+            (expr
+                (str)))))
+
+==================
+tuple with trailing comma
+==================
+
+(42, "joe",)
+
+---
+
+(source_file
+    (expr
+        (tuple
+            (expr
+                (int))
+            (expr
+                (str)))))
