@@ -578,7 +578,7 @@
     "fields": {
       "first": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "expr",
@@ -588,10 +588,20 @@
       },
       "last": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "range_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "range_type",
             "named": true
           }
         ]
@@ -607,6 +617,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "range_type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "source_file",
@@ -694,6 +709,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": "..",
     "named": false
   },
   {
