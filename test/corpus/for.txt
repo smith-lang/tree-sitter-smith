@@ -95,6 +95,7 @@ for i in [1..=10] { print(i) }
                     (range
                         first: (expr
                             (int))
+                        range_type: (range_type)
                         last: (expr
                             (int)))))
             (block
@@ -125,6 +126,7 @@ for i in [1..=10], j in [1..=10] {
                     (range
                         first: (expr
                             (int))
+                        range_type: (range_type)
                         last: (expr
                             (int)))))
             (index_var
@@ -133,6 +135,7 @@ for i in [1..=10], j in [1..=10] {
                     (range
                         first: (expr
                             (int))
+                        range_type: (range_type)
                         last: (expr
                             (int)))))
             (block

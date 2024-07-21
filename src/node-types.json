@@ -578,7 +578,7 @@
     "fields": {
       "first": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "expr",
@@ -596,6 +596,16 @@
           }
         ]
       },
+      "range_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "range_type",
+            "named": true
+          }
+        ]
+      },
       "second": {
         "multiple": false,
         "required": false,
@@ -607,6 +617,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "range_type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "source_file",
