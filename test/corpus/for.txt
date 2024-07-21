@@ -1,0 +1,137 @@
+==================
+for expression with one index variable
+==================
+
+for i { a[i] + 10 }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol))
+            (block
+                (expr
+                    (binary_op
+                        left: (expr
+                            (index
+                                (expr
+                                    (symbol))
+                                (expr
+                                    (symbol))))
+                        right: (expr
+                            (int))))))))
+
+==================
+for expression with two index variables
+==================
+
+for i, j { mat[j][i] }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol))
+            (index_var
+                (symbol))
+            (block
+                (expr
+                    (index
+                        (expr
+                            (index
+                                (expr
+                                    (symbol))
+                                (expr
+                                    (symbol))))
+                        (expr
+                            (symbol))))))))
+
+==================
+for expression with trailing comma
+==================
+
+for i, j, { mat[j][i] }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol))
+            (index_var
+                (symbol))
+            (block
+                (expr
+                    (index
+                        (expr
+                            (index
+                                (expr
+                                    (symbol))
+                                (expr
+                                    (symbol))))
+                        (expr
+                            (symbol))))))))
+
+
+==================
+for expression with first..=last
+==================
+
+for i in [1..=10] { print(i) }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol)
+                (expr
+                    (range
+                        first: (expr
+                            (int))
+                        last: (expr
+                            (int)))))
+            (block
+                (expr
+                    (call
+                        fn: (expr
+                            (symbol))
+                        args: (args
+                            (expr
+                                (symbol)))))))))
+
+==================
+for expression with first,second..=last
+==================
+
+for i in [1,3..=9] { print(i) }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol)
+                (expr
+                    (range
+                        first: (expr
+                            (int))
+                        second: (expr
+                            (int))
+                        last: (expr
+                            (int)))))
+            (block
+                (expr
+                    (call
+                        fn: (expr
+                            (symbol))
+                        args: (args
+                            (expr
+                                (symbol)))))))))
