@@ -64,6 +64,10 @@
             "named": false
           },
           {
+            "type": "<",
+            "named": false
+          },
+          {
             "type": ">",
             "named": false
           },
@@ -168,6 +172,32 @@
     }
   },
   {
+    "type": "else_if",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "then": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "expr",
     "named": true,
     "fields": {},
@@ -201,6 +231,10 @@
         },
         {
           "type": "fn",
+          "named": true
+        },
+        {
+          "type": "if",
           "named": true
         },
         {
@@ -313,6 +347,52 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "if",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "else": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "then": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "else_if",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -524,6 +604,10 @@
     "named": false
   },
   {
+    "type": "<",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
@@ -544,6 +628,14 @@
     "named": false
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "else if",
+    "named": false
+  },
+  {
     "type": "false",
     "named": false
   },
@@ -553,6 +645,10 @@
   },
   {
     "type": "fn",
+    "named": false
+  },
+  {
+    "type": "if",
     "named": false
   },
   {
