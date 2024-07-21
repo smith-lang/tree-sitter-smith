@@ -121,6 +121,22 @@ range expression with first..
                 (int)))))
 
 ==================
+range expression with first, second..
+==================
+
+[1,3..]
+
+---
+
+(source_file
+    (expr
+        (range
+            first: (expr
+                (int))
+            second: (expr
+                (int)))))
+
+==================
 range expression with ..=last
 ==================
 
@@ -149,6 +165,7 @@ range expression with ..<last
             range_type: (range_type)
             last: (expr
                 (int)))))
+
 
 ==================
 range expression with ..
