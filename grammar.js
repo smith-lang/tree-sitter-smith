@@ -24,6 +24,8 @@ module.exports = grammar({
         $.map,
         $.tuple,
         $.if,
+        $.for,
+        $.index,
       ),
 
     binary_op: ($) =>
@@ -140,5 +142,9 @@ module.exports = grammar({
         repeat($.else_if),
         optional(seq("else", field("else", $.block))),
       ),
+
+    for: ($) => seq("for", $.symbol, $.block),
+
+    index: ($) => prec.left(6, seq($.expr, "[", $.expr, "]")),
   },
 });

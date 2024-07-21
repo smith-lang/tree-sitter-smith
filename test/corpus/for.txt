@@ -1,0 +1,23 @@
+==================
+for expression
+==================
+
+for i { a[i] + 10 }
+
+---
+
+(source_file
+    (expr
+        (for
+            (symbol)
+            (block
+                (expr
+                    (binary_op
+                        left: (expr
+                            (index
+                                (expr
+                                    (symbol))
+                                (expr
+                                    (symbol))))
+                        right: (expr
+                            (int))))))))
