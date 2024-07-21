@@ -1,5 +1,5 @@
 ==================
-for expression
+for expression with one index variable
 ==================
 
 for i { a[i] + 10 }
@@ -9,7 +9,8 @@ for i { a[i] + 10 }
 (source_file
     (expr
         (for
-            (symbol)
+            (index_var
+                (symbol))
             (block
                 (expr
                     (binary_op
@@ -21,3 +22,86 @@ for i { a[i] + 10 }
                                     (symbol))))
                         right: (expr
                             (int))))))))
+
+==================
+for expression with two index variables
+==================
+
+for i, j { mat[j][i] }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol))
+            (index_var
+                (symbol))
+            (block
+                (expr
+                    (index
+                        (expr
+                            (index
+                                (expr
+                                    (symbol))
+                                (expr
+                                    (symbol))))
+                        (expr
+                            (symbol))))))))
+
+==================
+for expression with trailing comma
+==================
+
+for i, j, { mat[j][i] }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol))
+            (index_var
+                (symbol))
+            (block
+                (expr
+                    (index
+                        (expr
+                            (index
+                                (expr
+                                    (symbol))
+                                (expr
+                                    (symbol))))
+                        (expr
+                            (symbol))))))))
+
+
+==================
+for expression with start:stop
+==================
+
+for i in 1:10 { print(i) }
+
+---
+
+(source_file
+    (expr
+        (for
+            (index_var
+                (symbol)
+                (expr
+                    (range
+                        start: (expr
+                            (int))
+                        stop: (expr
+                            (int)))))
+            (block
+                (expr
+                    (call
+                        fn: (expr
+                            (symbol))
+                        args: (args
+                            (expr
+                                (symbol)))))))))

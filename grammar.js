@@ -26,6 +26,7 @@ module.exports = grammar({
         $.if,
         $.for,
         $.index,
+        $.range,
       ),
 
     binary_op: ($) =>
@@ -143,8 +144,20 @@ module.exports = grammar({
         optional(seq("else", field("else", $.block))),
       ),
 
-    for: ($) => seq("for", $.symbol, $.block),
+    index_var: ($) => seq($.symbol, optional(seq("in", $.expr))),
+
+    for: ($) =>
+      seq(
+        "for",
+        $.index_var,
+        repeat(seq(",", $.index_var)),
+        optional(","),
+        $.block,
+      ),
 
     index: ($) => prec.left(6, seq($.expr, "[", $.expr, "]")),
+
+    range: ($) =>
+      prec.left(seq(field("start", $.expr), ":", field("stop", $.expr))),
   },
 });
