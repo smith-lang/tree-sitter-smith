@@ -67,7 +67,7 @@ if x > 3 { 1 } else { 2 }
                     (int))))))
 
 ==================
-if else if else
+if, else if, else
 ==================
 
 if x > 3 {
@@ -97,6 +97,78 @@ if x > 3 {
                         args: (args
                             (expr
                                 (str))))))
+            (else_if
+                condition: (expr
+                    (binary_op
+                        left: (expr
+                            (symbol))
+                        right: (expr
+                            (int))))
+                then: (block
+                    (expr
+                        (call
+                            fn: (expr
+                                (symbol))
+                            args: (args
+                                (expr
+                                    (str)))))))
+            else: (block
+                (expr
+                    (call
+                        fn: (expr
+                            (symbol))
+                        args: (args
+                            (expr
+                                (str)))))))))
+
+==================
+if, else if, else if, else
+==================
+
+if x > 100 {
+    print("greater than 100")
+} else if x > 50 {
+    print("greater then 50")
+} else if x > 10 {
+    print("greater then 10")
+} else {
+    print("10 or less")
+}
+
+---
+
+(source_file
+    (expr
+        (if
+            condition: (expr
+                (binary_op
+                    left: (expr
+                        (symbol))
+                    right: (expr
+                        (int))))
+            then: (block
+                (expr
+                    (call
+                        fn: (expr
+                            (symbol))
+                        args: (args
+                            (expr
+                                (str))))))
+            (else_if
+                condition: (expr
+                    (binary_op
+                        left: (expr
+                            (symbol))
+                        right: (expr
+                            (int))))
+                then: (block
+                    (expr
+                        (call
+                            fn: (expr
+                                (symbol))
+                            args: (args
+                                (expr
+                                    (str)))))))
             (else_if
                 condition: (expr
                     (binary_op
