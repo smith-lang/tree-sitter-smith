@@ -588,7 +588,7 @@
       },
       "last": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "expr",
@@ -694,6 +694,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": "..",
     "named": false
   },
   {

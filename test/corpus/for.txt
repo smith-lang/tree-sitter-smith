@@ -79,7 +79,7 @@ for i, j, { mat[j][i] }
 
 
 ==================
-for expression with first..=last
+for expression with range
 ==================
 
 for i in [1..=10] { print(i) }
@@ -107,10 +107,12 @@ for i in [1..=10] { print(i) }
                                 (symbol)))))))))
 
 ==================
-for expression with first,second..=last
+for expression with multiple ranges
 ==================
 
-for i in [1,3..=9] { print(i) }
+for i in [1..=10], j in [1..=10] {
+    print(i * j)
+}
 
 ---
 
@@ -123,7 +125,13 @@ for i in [1,3..=9] { print(i) }
                     (range
                         first: (expr
                             (int))
-                        second: (expr
+                        last: (expr
+                            (int)))))
+            (index_var
+                (symbol)
+                (expr
+                    (range
+                        first: (expr
                             (int))
                         last: (expr
                             (int)))))
@@ -134,4 +142,8 @@ for i in [1,3..=9] { print(i) }
                             (symbol))
                         args: (args
                             (expr
-                                (symbol)))))))))
+                                (binary_op
+                                    left: (expr
+                                        (symbol))
+                                    right: (expr
+                                        (symbol)))))))))))
