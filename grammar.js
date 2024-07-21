@@ -23,6 +23,7 @@ module.exports = grammar({
         $.array,
         $.map,
         $.tuple,
+        $.if,
       ),
 
     binary_op: ($) =>
@@ -30,6 +31,7 @@ module.exports = grammar({
         ...[
           ["|", 1],
           [">", 1],
+          ["<", 1],
           ["+", 2],
           ["-", 2],
           ["*", 3],
@@ -125,6 +127,18 @@ module.exports = grammar({
         "(",
         optional(seq($.expr, ",", repeat(seq($.expr, optional(","))))),
         ")",
+      ),
+
+    else_if: ($) =>
+      seq("else if", field("condition", $.expr), field("then", $.block)),
+
+    if: ($) =>
+      seq(
+        "if",
+        field("condition", $.expr),
+        field("then", $.block),
+        repeat($.else_if),
+        optional(seq("else", field("else", $.block))),
       ),
   },
 });
