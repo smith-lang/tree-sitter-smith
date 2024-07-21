@@ -158,6 +158,13 @@ module.exports = grammar({
     index: ($) => prec.left(6, seq($.expr, "[", $.expr, "]")),
 
     range: ($) =>
-      prec.left(seq(field("start", $.expr), ":", field("stop", $.expr))),
+      seq(
+        "[",
+        field("first", $.expr),
+        optional(seq(",", field("second", $.expr))),
+        choice("..=", "..>", "..<"),
+        field("last", $.expr),
+        "]",
+      ),
   },
 });

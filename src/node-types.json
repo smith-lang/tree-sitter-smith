@@ -576,7 +576,7 @@
     "type": "range",
     "named": true,
     "fields": {
-      "start": {
+      "first": {
         "multiple": false,
         "required": true,
         "types": [
@@ -586,9 +586,19 @@
           }
         ]
       },
-      "stop": {
+      "last": {
         "multiple": false,
         "required": true,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "second": {
+        "multiple": false,
+        "required": false,
         "types": [
           {
             "type": "expr",
@@ -684,6 +694,18 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": "..<",
+    "named": false
+  },
+  {
+    "type": "..=",
+    "named": false
+  },
+  {
+    "type": "..>",
     "named": false
   },
   {
