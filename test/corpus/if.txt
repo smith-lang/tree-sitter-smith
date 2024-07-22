@@ -7,16 +7,19 @@ if true { 1 } else { 2 }
 ---
 
 (source_file
-    (expr
-        (if
-            condition: (expr
-                (bool))
-            then: (block
-                (expr
-                    (int)))
-            else: (block
-                (expr
-                    (int))))))
+    (statement
+      (expression
+          (if_expression
+              condition: (expression
+                  (boolean_literal))
+              then: (block
+                  (statement
+                    (expression
+                        (integer_literal))))
+              else: (block
+                  (statement
+                    (expression
+                        (integer_literal))))))))
 
 ==================
 if with no else
@@ -29,18 +32,20 @@ if true {
 ---
 
 (source_file
-    (expr
-        (if
-            condition: (expr
-                (bool))
-            then: (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (str)))))))))
+    (statement
+      (expression
+          (if_expression
+              condition: (expression
+                  (boolean_literal))
+              then: (block
+                  (statement
+                    (expression
+                        (function_call
+                            function: (expression
+                                (identifier))
+                            arguments: (function_arguments
+                                (expression
+                                    (string_literal)))))))))))
 
 ==================
 if with complex condition
@@ -51,20 +56,23 @@ if x > 3 { 1 } else { 2 }
 ---
 
 (source_file
-    (expr
-        (if
-            condition: (expr
-                (binary_op
-                    left: (expr
-                        (symbol))
-                    right: (expr
-                        (int))))
-            then: (block
-                (expr
-                    (int)))
-            else: (block
-                (expr
-                    (int))))))
+    (statement
+      (expression
+          (if_expression
+              condition: (expression
+                  (binary_operation
+                      left: (expression
+                          (identifier))
+                      right: (expression
+                          (integer_literal))))
+              then: (block
+                  (statement
+                      (expression
+                          (integer_literal))))
+              else: (block
+                  (statement
+                      (expression
+                          (integer_literal))))))))
 
 ==================
 if, else if, else
@@ -81,45 +89,49 @@ if x > 3 {
 ---
 
 (source_file
-    (expr
-        (if
-            condition: (expr
-                (binary_op
-                    left: (expr
-                        (symbol))
-                    right: (expr
-                        (int))))
-            then: (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (str))))))
-            (else_if
-                condition: (expr
-                    (binary_op
-                        left: (expr
-                            (symbol))
-                        right: (expr
-                            (int))))
-                then: (block
-                    (expr
-                        (call
-                            fn: (expr
-                                (symbol))
-                            args: (args
-                                (expr
-                                    (str)))))))
-            else: (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (str)))))))))
+    (statement
+      (expression
+          (if_expression
+              condition: (expression
+                  (binary_operation
+                      left: (expression
+                          (identifier))
+                      right: (expression
+                          (integer_literal))))
+              then: (block
+                  (statement
+                      (expression
+                          (function_call
+                              function: (expression
+                                  (identifier))
+                              arguments: (function_arguments
+                                  (expression
+                                      (string_literal)))))))
+              (else_if
+                  condition: (expression
+                      (binary_operation
+                          left: (expression
+                              (identifier))
+                          right: (expression
+                              (integer_literal))))
+                  then: (block
+                      (statement
+                          (expression
+                              (function_call
+                                  function: (expression
+                                      (identifier))
+                                  arguments: (function_arguments
+                                      (expression
+                                          (string_literal))))))))
+              else: (block
+                  (statement
+                      (expression
+                          (function_call
+                              function: (expression
+                                  (identifier))
+                              arguments: (function_arguments
+                                  (expression
+                                      (string_literal)))))))))))
 
 ==================
 if, else if, else if, else
@@ -138,57 +150,62 @@ if x > 100 {
 ---
 
 (source_file
-    (expr
-        (if
-            condition: (expr
-                (binary_op
-                    left: (expr
-                        (symbol))
-                    right: (expr
-                        (int))))
-            then: (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (str))))))
-            (else_if
-                condition: (expr
-                    (binary_op
-                        left: (expr
-                            (symbol))
-                        right: (expr
-                            (int))))
-                then: (block
-                    (expr
-                        (call
-                            fn: (expr
-                                (symbol))
-                            args: (args
-                                (expr
-                                    (str)))))))
-            (else_if
-                condition: (expr
-                    (binary_op
-                        left: (expr
-                            (symbol))
-                        right: (expr
-                            (int))))
-                then: (block
-                    (expr
-                        (call
-                            fn: (expr
-                                (symbol))
-                            args: (args
-                                (expr
-                                    (str)))))))
-            else: (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (str)))))))))
+    (statement
+      (expression
+          (if_expression
+              condition: (expression
+                  (binary_operation
+                      left: (expression
+                          (identifier))
+                      right: (expression
+                          (integer_literal))))
+              then: (block
+                  (statement
+                      (expression
+                          (function_call
+                              function: (expression
+                                  (identifier))
+                              arguments: (function_arguments
+                                  (expression
+                                      (string_literal)))))))
+              (else_if
+                  condition: (expression
+                      (binary_operation
+                          left: (expression
+                              (identifier))
+                          right: (expression
+                              (integer_literal))))
+                  then: (block
+                      (statement
+                          (expression
+                              (function_call
+                                  function: (expression
+                                      (identifier))
+                                  arguments: (function_arguments
+                                      (expression
+                                          (string_literal))))))))
+              (else_if
+                  condition: (expression
+                      (binary_operation
+                          left: (expression
+                              (identifier))
+                          right: (expression
+                              (integer_literal))))
+                  then: (block
+                      (statement
+                          (expression
+                              (function_call
+                                  function: (expression
+                                      (identifier))
+                                  arguments: (function_arguments
+                                      (expression
+                                          (string_literal))))))))
+              else: (block
+                  (statement
+                      (expression
+                          (function_call
+                              function: (expression
+                                  (identifier))
+                              arguments: (function_arguments
+                                  (expression
+                                      (string_literal)))))))))))

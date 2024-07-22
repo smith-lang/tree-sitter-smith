@@ -7,13 +7,14 @@ range with first..=last
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first,second..=last
@@ -24,15 +25,16 @@ range expression with first,second..=last
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            second: (expr
-                (int))
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              second: (expression
+                  (integer_literal))
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first..<last
@@ -43,13 +45,14 @@ range expression with first..<last
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first,second..<last
@@ -60,15 +63,16 @@ range expression with first,second..<last
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            second: (expr
-                (int))
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              second: (expression
+                  (integer_literal))
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first..>last
@@ -79,13 +83,14 @@ range expression with first..>last
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first,second..>last
@@ -96,15 +101,16 @@ range expression with first,second..>last
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            second: (expr
-                (int))
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              second: (expression
+                  (integer_literal))
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first..
@@ -115,10 +121,11 @@ range expression with first..
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with first, second..
@@ -129,12 +136,13 @@ range expression with first, second..
 ---
 
 (source_file
-    (expr
-        (range
-            first: (expr
-                (int))
-            second: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              first: (expression
+                  (integer_literal))
+              second: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with ..=last
@@ -145,11 +153,12 @@ range expression with ..=last
 ---
 
 (source_file
-    (expr
-        (range
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 ==================
 range expression with ..<last
@@ -160,11 +169,12 @@ range expression with ..<last
 ---
 
 (source_file
-    (expr
-        (range
-            range_type: (range_type)
-            last: (expr
-                (int)))))
+    (statement
+      (expression
+          (range_expression
+              range_type: (range_type)
+              last: (expression
+                  (integer_literal))))))
 
 
 ==================
@@ -176,5 +186,6 @@ range expression with ..
 ---
 
 (source_file
-    (expr
-        (range)))
+    (statement
+      (expression
+          (range_expression))))

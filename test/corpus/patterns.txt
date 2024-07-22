@@ -1,0 +1,275 @@
+==================
+variable definition with explicit type
+==================
+
+name: type = value
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (identifier))
+          type: (expression
+              (identifier))
+          value: (expression
+              (identifier)))))
+
+
+==================
+variable definition with inferred type
+==================
+
+name = value
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (identifier))
+          value: (expression
+              (identifier)))))
+
+==================
+tuple destructuring
+==================
+
+(x, y, z) = (1, 3.14, "hello")
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (tuple_pattern
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))))
+          value: (expression
+              (tuple_literal
+                  (expression
+                      (integer_literal))
+                  (expression
+                      (float_literal))
+                  (expression
+                      (string_literal)))))))
+
+==================
+array destructuring
+==================
+
+[x, y, z] = [1, 2, 3]
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (array_pattern
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))))
+          value: (expression
+              (array_literal
+                  (expression
+                      (integer_literal))
+                  (expression
+                      (integer_literal))
+                  (expression
+                      (integer_literal)))))))
+
+==================
+map destructuring
+==================
+
+{first, last} = {first: "John", last: "Doe"}
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (map_pattern
+                  (map_pattern_field
+                      key: (identifier))
+                  (map_pattern_field
+                      key: (identifier))))
+          value: (expression
+            (map_literal
+              (map_pairs
+                (map_pair
+                  key: (identifier)
+                  value: (expression
+                    (string_literal)))
+                (map_pair
+                  key: (identifier)
+                  value: (expression
+                    (string_literal)))))))))
+
+==================
+nested map destructuring
+==================
+
+{name: {first, last}} = {name: {first: "John", last: "Doe"}}
+
+---
+
+    (source_file
+      (statement
+        (variable_definition
+          pattern: (pattern_expression
+            (map_pattern
+              (map_pattern_field
+                key: (identifier)
+                value: (pattern_expression
+                  (map_pattern
+                    (map_pattern_field
+                      key: (identifier))
+                    (map_pattern_field
+                      key: (identifier)))))))
+          value: (expression
+            (map_literal
+              (map_pairs
+                (map_pair
+                  key: (identifier)
+                  value: (expression
+                    (map_literal
+                      (map_pairs
+                        (map_pair
+                          key: (identifier)
+                          value: (expression
+                            (string_literal)))
+                        (map_pair
+                          key: (identifier)
+                          value: (expression
+                            (string_literal)))))))))))))
+
+==================
+tuple inside array
+==================
+
+[(x, y), z] = [(1, 2), (3, 4)]
+
+---
+
+    (source_file
+      (statement
+        (variable_definition
+          pattern: (pattern_expression
+            (array_pattern
+              (pattern_expression
+                (tuple_pattern
+                  (pattern_expression
+                    (identifier))
+                  (pattern_expression
+                    (identifier))))
+              (pattern_expression
+                (identifier))))
+          value: (expression
+            (array_literal
+              (expression
+                (tuple_literal
+                  (expression
+                    (integer_literal))
+                  (expression
+                    (integer_literal))))
+              (expression
+                (tuple_literal
+                  (expression
+                    (integer_literal))
+                  (expression
+                    (integer_literal)))))))))
+
+==================
+array inside tuple
+==================
+
+([x, y], z) = ([1, 2], 3)
+
+---
+
+    (source_file
+      (statement
+        (variable_definition
+          pattern: (pattern_expression
+            (tuple_pattern
+              (pattern_expression
+                (array_pattern
+                  (pattern_expression
+                    (identifier))
+                  (pattern_expression
+                    (identifier))))
+              (pattern_expression
+                (identifier))))
+          value: (expression
+            (tuple_literal
+              (expression
+                (array_literal
+                  (expression
+                    (integer_literal))
+                  (expression
+                    (integer_literal))))
+              (expression
+                (integer_literal)))))))
+
+==================
+patterns work for function parameters
+==================
+
+square = fn((x, y): (i32, i32)) i32 {
+    x * x + y * y
+}
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (identifier))
+          value: (expression
+            (function_definition
+              parameters: (function_parameters
+                (function_parameter
+                  pattern: (pattern_expression
+                    (tuple_pattern
+                      (pattern_expression
+                        (identifier))
+                      (pattern_expression
+                        (identifier))))
+                  type: (expression
+                    (tuple_literal
+                      (expression
+                        (identifier))
+                      (expression
+                        (identifier))))))
+              return_type: (expression
+                (identifier))
+              body: (block
+                (statement
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (identifier))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (binary_operation
+                          left: (expression
+                            (identifier))
+                          right: (expression
+                            (identifier)))))))))))))

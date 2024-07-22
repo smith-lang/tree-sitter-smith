@@ -7,21 +7,23 @@ for i { a[i] + 10 }
 ---
 
 (source_file
-    (expr
-        (for
-            (index_var
-                (symbol))
-            (block
-                (expr
-                    (binary_op
-                        left: (expr
-                            (index
-                                (expr
-                                    (symbol))
-                                (expr
-                                    (symbol))))
-                        right: (expr
-                            (int))))))))
+    (statement
+      (expression
+          (for_expression
+              (index_variable
+                  (identifier))
+              (block
+                  (statement
+                      (expression
+                          (binary_operation
+                              left: (expression
+                                  (index_expression
+                                      (expression
+                                          (identifier))
+                                      (expression
+                                          (identifier))))
+                              right: (expression
+                                  (integer_literal))))))))))
 
 ==================
 for expression with two index variables
@@ -32,23 +34,25 @@ for i, j { mat[j][i] }
 ---
 
 (source_file
-    (expr
-        (for
-            (index_var
-                (symbol))
-            (index_var
-                (symbol))
-            (block
-                (expr
-                    (index
-                        (expr
-                            (index
-                                (expr
-                                    (symbol))
-                                (expr
-                                    (symbol))))
-                        (expr
-                            (symbol))))))))
+    (statement
+      (expression
+          (for_expression
+              (index_variable
+                  (identifier))
+              (index_variable
+                  (identifier))
+              (block
+                  (statement
+                      (expression
+                          (index_expression
+                              (expression
+                                  (index_expression
+                                      (expression
+                                          (identifier))
+                                      (expression
+                                          (identifier))))
+                              (expression
+                                  (identifier))))))))))
 
 ==================
 for expression with trailing comma
@@ -59,23 +63,25 @@ for i, j, { mat[j][i] }
 ---
 
 (source_file
-    (expr
-        (for
-            (index_var
-                (symbol))
-            (index_var
-                (symbol))
-            (block
-                (expr
-                    (index
-                        (expr
-                            (index
-                                (expr
-                                    (symbol))
-                                (expr
-                                    (symbol))))
-                        (expr
-                            (symbol))))))))
+    (statement
+      (expression
+          (for_expression
+              (index_variable
+                  (identifier))
+              (index_variable
+                  (identifier))
+              (block
+                  (statement
+                      (expression
+                          (index_expression
+                              (expression
+                                  (index_expression
+                                      (expression
+                                          (identifier))
+                                      (expression
+                                          (identifier))))
+                              (expression
+                                  (identifier))))))))))
 
 
 ==================
@@ -87,25 +93,27 @@ for i in [1..=10] { print(i) }
 ---
 
 (source_file
-    (expr
-        (for
-            (index_var
-                (symbol)
-                (expr
-                    (range
-                        first: (expr
-                            (int))
-                        range_type: (range_type)
-                        last: (expr
-                            (int)))))
-            (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (symbol)))))))))
+    (statement
+      (expression
+          (for_expression
+              (index_variable
+                  (identifier)
+                  (expression
+                      (range_expression
+                          first: (expression
+                              (integer_literal))
+                          range_type: (range_type)
+                          last: (expression
+                              (integer_literal)))))
+              (block
+                  (statement
+                      (expression
+                          (function_call
+                              function: (expression
+                                  (identifier))
+                              arguments: (function_arguments
+                                  (expression
+                                      (identifier)))))))))))
 
 ==================
 for expression with multiple ranges
@@ -118,35 +126,37 @@ for i in [1..=10], j in [1..=10] {
 ---
 
 (source_file
-    (expr
-        (for
-            (index_var
-                (symbol)
-                (expr
-                    (range
-                        first: (expr
-                            (int))
-                        range_type: (range_type)
-                        last: (expr
-                            (int)))))
-            (index_var
-                (symbol)
-                (expr
-                    (range
-                        first: (expr
-                            (int))
-                        range_type: (range_type)
-                        last: (expr
-                            (int)))))
-            (block
-                (expr
-                    (call
-                        fn: (expr
-                            (symbol))
-                        args: (args
-                            (expr
-                                (binary_op
-                                    left: (expr
-                                        (symbol))
-                                    right: (expr
-                                        (symbol)))))))))))
+    (statement
+      (expression
+          (for_expression
+              (index_variable
+                  (identifier)
+                  (expression
+                      (range_expression
+                          first: (expression
+                              (integer_literal))
+                          range_type: (range_type)
+                          last: (expression
+                              (integer_literal)))))
+              (index_variable
+                  (identifier)
+                  (expression
+                      (range_expression
+                          first: (expression
+                              (integer_literal))
+                          range_type: (range_type)
+                          last: (expression
+                              (integer_literal)))))
+              (block
+                  (statement
+                      (expression
+                          (function_call
+                              function: (expression
+                                  (identifier))
+                              arguments: (function_arguments
+                                  (expression
+                                      (binary_operation
+                                          left: (expression
+                                              (identifier))
+                                          right: (expression
+                                              (identifier)))))))))))))
