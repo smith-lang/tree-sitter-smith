@@ -217,15 +217,26 @@ module.exports = grammar({
 
     tuple_pattern: ($) =>
       prec(10,
-      seq(
-        "(",
-        optional(
-          seq($.pattern_expression, ",", repeat(seq($.pattern_expression, optional(",")))),
+        seq(
+          "(",
+          optional(
+            seq($.pattern_expression, ",", repeat(seq($.pattern_expression, optional(",")))),
+          ),
+          ")",
         ),
-        ")",
-      ),
       ),
 
-    pattern_expression: ($) => prec(10, choice($.identifier, $.tuple_pattern)),
+    array_pattern: ($) =>
+      prec(10,
+        seq(
+          "[",
+          optional(
+            seq($.pattern_expression, ",", repeat(seq($.pattern_expression, optional(",")))),
+          ),
+          "]",
+        ),
+      ),
+
+    pattern_expression: ($) => prec(10, choice($.identifier, $.tuple_pattern, $.array_pattern)),
   },
 });

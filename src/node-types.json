@@ -15,6 +15,21 @@
     }
   },
   {
+    "type": "array_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_operation",
     "named": true,
     "fields": {
@@ -499,6 +514,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "array_pattern",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true

@@ -37,7 +37,7 @@ name = value
 tuple destructuring
 ==================
 
-(x, y) = (1, 2)
+(x, y, z) = (1, 3.14, "hello")
 
 ---
 
@@ -49,9 +49,41 @@ tuple destructuring
                   (pattern_expression
                       (identifier))
                   (pattern_expression
+                      (identifier))
+                  (pattern_expression
                       (identifier))))
           value: (expression
               (tuple_literal
+                  (expression
+                      (integer_literal))
+                  (expression
+                      (float_literal))
+                  (expression
+                      (string_literal)))))))
+
+==================
+array destructuring
+==================
+
+[x, y, z] = [1, 2, 3]
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (array_pattern
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))))
+          value: (expression
+              (array_literal
+                  (expression
+                      (integer_literal))
                   (expression
                       (integer_literal))
                   (expression
