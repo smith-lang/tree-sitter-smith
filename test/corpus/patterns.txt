@@ -88,3 +88,32 @@ array destructuring
                       (integer_literal))
                   (expression
                       (integer_literal)))))))
+
+==================
+map destructuring
+==================
+
+{first, last} = {first: "John", last: "Doe"}
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (map_pattern
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))))
+          value: (expression
+            (map_literal
+              (map_pairs
+                (map_pair
+                  key: (identifier)
+                  value: (expression
+                    (string_literal)))
+                (map_pair
+                  key: (identifier)
+                  value: (expression
+                    (string_literal)))))))))

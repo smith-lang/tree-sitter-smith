@@ -492,6 +492,21 @@
     }
   },
   {
+    "type": "map_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parenthesized_expression",
     "named": true,
     "fields": {},
@@ -520,6 +535,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "map_pattern",
           "named": true
         },
         {
