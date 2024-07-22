@@ -1,183 +1,220 @@
 module.exports = grammar({
   name: "smith",
 
-  word: ($) => $.symbol,
+  word: ($) => $.identifier,
 
   rules: {
-    source_file: ($) => repeat($.expr),
+    source_file: ($) => repeat($.statement),
 
-    expr: ($) =>
+    statement: ($) => choice($.variable_definition, $.expression),
+
+    expression: ($) =>
       choice(
-        $.binary_op,
-        $.unary_op,
-        $.paren,
-        $.int,
-        $.float,
-        $.str,
-        $.bool,
-        $.fn,
-        $.call,
-        $.symbol,
-        $.def,
-        $.struct,
-        $.array,
-        $.map,
-        $.tuple,
-        $.if,
-        $.for,
-        $.index,
-        $.range,
+        $.binary_operation,
+        $.unary_operation,
+        $.parenthesized_expression,
+        $.integer_literal,
+        $.float_literal,
+        $.string_literal,
+        $.boolean_literal,
+        $.function_definition,
+        $.function_call,
+        $.identifier,
+        $.struct_definition,
+        $.array_literal,
+        $.map_literal,
+        $.tuple_literal,
+        $.if_expression,
+        $.for_expression,
+        $.index_expression,
+        $.range_expression,
       ),
 
-    binary_op: ($) =>
+    binary_operation: ($) =>
       choice(
         ...[
-          ["|", 1],
-          [">", 1],
-          ["<", 1],
-          ["+", 2],
-          ["-", 2],
-          ["*", 3],
-          ["/", 3],
+          ["|", 2],
+          [">", 2],
+          ["<", 2],
+          ["+", 3],
+          ["-", 3],
+          ["*", 4],
+          ["/", 4],
         ].map(([operator, precedence]) =>
           prec.left(
             precedence,
             seq(
-              field("left", $.expr),
+              field("left", $.expression),
               field("operator", operator),
-              field("right", $.expr),
+              field("right", $.expression),
             ),
           ),
         ),
       ),
 
-    unary_op: ($) =>
+    unary_operation: ($) =>
       prec(
-        4,
+        8,
         choice(
-          seq("-", $.expr),
-          seq("not", $.expr),
-          seq("*", $.expr),
-          seq("?", $.expr),
-          seq($.array, $.expr),
+          seq("-", $.expression),
+          seq("not", $.expression),
+          seq("*", $.expression),
+          seq("?", $.expression),
+          seq($.array_literal, $.expression),
         ),
       ),
 
-    paren: ($) => seq("(", $.expr, ")"),
+    parenthesized_expression: ($) => seq("(", $.expression, ")"),
 
-    int: () => /[0-9]+/,
+    integer_literal: () => /[0-9]+/,
 
-    float: () => /[0-9]+\.[0-9]+/,
+    float_literal: () => /[0-9]+\.[0-9]+/,
 
-    str: () => /"[^"]*"/,
+    string_literal: () => /"[^"]*"/,
 
-    bool: () => choice("true", "false"),
+    boolean_literal: () => choice("true", "false"),
 
-    symbol: () => /[a-zA-Z_]\w*/,
+    identifier: () => /[a-zA-Z_]\w*/,
 
-    param: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
+    function_parameter: ($) =>
+      seq(
+        field("pattern", $.pattern_expression),
+        ":",
+        field("type", $.expression),
+      ),
 
-    params: ($) => seq($.param, repeat(seq(",", $.param))),
+    function_parameters: ($) =>
+      seq($.function_parameter, repeat(seq(",", $.function_parameter))),
 
-    block: ($) => seq("{", repeat($.expr), "}"),
+    block: ($) => seq("{", repeat($.statement), "}"),
 
-    fn: ($) =>
+    function_definition: ($) =>
       seq(
         "fn",
         "(",
-        optional(field("params", $.params)),
+        optional(field("parameters", $.function_parameters)),
         ")",
-        field("return_type", $.expr),
+        field("return_type", $.expression),
         field("body", $.block),
       ),
 
-    args: ($) => seq($.expr, repeat(seq(",", $.expr)), optional(",")),
+    function_arguments: ($) =>
+      seq($.expression, repeat(seq(",", $.expression)), optional(",")),
 
-    call: ($) =>
+    function_call: ($) =>
       prec(
-        5,
-        seq(field("fn", $.expr), "(", optional(field("args", $.args)), ")"),
-      ),
-
-    def: ($) =>
-      prec.right(
-        1,
+        9,
         seq(
-          field("name", $.symbol),
-          optional(seq(":", field("type", $.expr))),
-          "=",
-          field("value", $.expr),
+          field("function", $.expression),
+          "(",
+          optional(field("arguments", $.function_arguments)),
+          ")",
         ),
       ),
 
-    field: ($) => seq(field("name", $.symbol), ":", field("type", $.expr)),
+    variable_definition: ($) =>
+      prec.right(
+        1,
+        seq(
+          field("pattern", $.pattern_expression),
+          optional(seq(":", field("type", $.expression))),
+          "=",
+          field("value", $.expression),
+        ),
+      ),
 
-    fields: ($) => seq($.field, repeat(seq(",", $.field)), optional(",")),
+    struct_field: ($) =>
+      seq(field("name", $.identifier), ":", field("type", $.expression)),
 
-    struct: ($) => seq("struct", "{", optional($.fields), "}"),
+    struct_fields: ($) =>
+      seq($.struct_field, repeat(seq(",", $.struct_field)), optional(",")),
 
-    array: ($) =>
-      seq("[", optional($.expr), repeat(seq(",", $.expr)), optional(","), "]"),
+    struct_definition: ($) =>
+      seq("struct", "{", optional($.struct_fields), "}"),
 
-    pair: ($) => seq(field("key", $.symbol), ":", field("value", $.expr)),
+    array_literal: ($) =>
+      seq(
+        "[",
+        optional($.expression),
+        repeat(seq(",", $.expression)),
+        optional(","),
+        "]",
+      ),
 
-    pairs: ($) => seq($.pair, repeat(seq(",", $.pair)), optional(",")),
+    map_pair: ($) =>
+      seq(
+        field("key", $.identifier),
+        optional(seq(":", field("value", $.expression))),
+      ),
 
-    map: ($) => seq("{", optional($.pairs), "}"),
+    map_pairs: ($) =>
+      seq($.map_pair, repeat(seq(",", $.map_pair)), optional(",")),
 
-    tuple: ($) =>
+    map_literal: ($) => seq("{", optional($.map_pairs), "}"),
+
+    tuple_literal: ($) =>
       seq(
         "(",
-        optional(seq($.expr, ",", repeat(seq($.expr, optional(","))))),
+        optional(
+          seq($.expression, ",", repeat(seq($.expression, optional(",")))),
+        ),
         ")",
       ),
 
     else_if: ($) =>
-      seq("else if", field("condition", $.expr), field("then", $.block)),
+      seq("else if", field("condition", $.expression), field("then", $.block)),
 
-    if: ($) =>
+    if_expression: ($) =>
       seq(
         "if",
-        field("condition", $.expr),
+        field("condition", $.expression),
         field("then", $.block),
         repeat($.else_if),
         optional(seq("else", field("else", $.block))),
       ),
 
-    index_var: ($) => seq($.symbol, optional(seq("in", $.expr))),
+    index_variable: ($) => seq($.identifier, optional(seq("in", $.expression))),
 
-    for: ($) =>
+    for_expression: ($) =>
       seq(
         "for",
-        $.index_var,
-        repeat(seq(",", $.index_var)),
+        $.index_variable,
+        repeat(seq(",", $.index_variable)),
         optional(","),
         $.block,
       ),
 
-    index: ($) => prec.left(6, seq($.expr, "[", $.expr, "]")),
+    index_expression: ($) =>
+      prec.left(9, seq($.expression, "[", $.expression, "]")),
 
     range_type: () => choice("..=", "..>", "..<"),
 
-    range: ($) =>
+    range_expression: ($) =>
       choice(
         seq(
           "[",
-          field("first", $.expr),
-          optional(seq(",", field("second", $.expr))),
+          field("first", $.expression),
+          optional(seq(",", field("second", $.expression))),
           field("range_type", $.range_type),
-          field("last", $.expr),
+          field("last", $.expression),
           "]",
         ),
         seq(
           "[",
-          field("first", $.expr),
-          optional(seq(",", field("second", $.expr))),
+          field("first", $.expression),
+          optional(seq(",", field("second", $.expression))),
           "..",
           "]",
         ),
-        seq("[", field("range_type", $.range_type), field("last", $.expr), "]"),
+        seq(
+          "[",
+          field("range_type", $.range_type),
+          field("last", $.expression),
+          "]",
+        ),
         seq("[", "..", "]"),
       ),
+
+    pattern_expression: ($) => $.identifier,
   },
 });

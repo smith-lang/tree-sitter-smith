@@ -7,11 +7,12 @@ Empty = struct {}
 ---
 
 (source_file
-    (expr
-        (def
-            name: (symbol)
-            value: (expr
-                (struct)))))
+    (statement
+        (variable_definition
+            pattern: (pattern_expression
+                (identifier))
+            value: (expression
+                (struct_definition)))))
 
 ==================
 Struct definition with one field
@@ -24,16 +25,16 @@ Square = struct {
 ---
 
 (source_file
-    (expr
-        (def
-            name: (symbol)
-            value: (expr
-                (struct
-                    (fields
-                        (field
-                            name: (symbol)
-                            type: (expr
-                                (symbol)))))))))
+    (statement
+        (variable_definition
+            pattern: (pattern_expression (identifier))
+            value: (expression
+                (struct_definition
+                    (struct_fields
+                        (struct_field
+                            name: (identifier)
+                            type: (expression
+                                (identifier)))))))))
 
 ==================
 Struct definition with two fields
@@ -47,20 +48,20 @@ Rectangle = struct {
 ---
 
 (source_file
-    (expr
-        (def
-            name: (symbol)
-            value: (expr
-                (struct
-                    (fields
-                        (field
-                            name: (symbol)
-                            type: (expr
-                                (symbol)))
-                        (field
-                            name: (symbol)
-                            type: (expr
-                                (symbol)))))))))
+    (statement
+        (variable_definition
+            pattern: (pattern_expression (identifier))
+            value: (expression
+                (struct_definition
+                    (struct_fields
+                        (struct_field
+                            name: (identifier)
+                            type: (expression
+                                (identifier)))
+                        (struct_field
+                            name: (identifier)
+                            type: (expression
+                                (identifier)))))))))
 
 
 ==================
@@ -75,20 +76,20 @@ Rectangle = struct {
 ---
 
 (source_file
-    (expr
-        (def
-            name: (symbol)
-            value: (expr
-                (struct
-                    (fields
-                        (field
-                            name: (symbol)
-                            type: (expr
-                                (symbol)))
-                        (field
-                            name: (symbol)
-                            type: (expr
-                                (symbol)))))))))
+    (statement
+        (variable_definition
+            pattern: (pattern_expression (identifier))
+            value: (expression
+                (struct_definition
+                    (struct_fields
+                        (struct_field
+                            name: (identifier)
+                            type: (expression
+                                (identifier)))
+                        (struct_field
+                            name: (identifier)
+                            type: (expression
+                                (identifier)))))))))
 
 ==================
 Generic struct definition with two fields
@@ -96,7 +97,7 @@ Generic struct definition with two fields
 
 Slice = fn(T: type) type {
     struct {
-        data: ptr(T),
+        data: *T,
         len: usize,
     }
 }
@@ -104,32 +105,31 @@ Slice = fn(T: type) type {
 ---
 
 (source_file
-    (expr
-        (def
-            name: (symbol)
-            value: (expr
-                (fn
-                    params: (params
-                        (param
-                            name: (symbol)
-                            type: (expr
-                                (symbol))))
-                    return_type: (expr
-                        (symbol))
+    (statement
+        (variable_definition
+            pattern: (pattern_expression
+              (identifier))
+            value: (expression
+                (function_definition
+                    parameters: (function_parameters
+                        (function_parameter
+                            pattern: (pattern_expression (identifier))
+                            type: (expression
+                                (identifier))))
+                    return_type: (expression
+                        (identifier))
                     body: (block
-                        (expr
-                        (struct
-                            (fields
-                                (field
-                                    name: (symbol)
-                                    type: (expr
-                                        (call
-                                            fn: (expr
-                                                (symbol))
-                                            args: (args
-                                                (expr
-                                                    (symbol))))))
-                                (field
-                                    name: (symbol)
-                                    type: (expr
-                                        (symbol))))))))))))
+                      (statement
+                        (expression
+                          (struct_definition
+                              (struct_fields
+                                  (struct_field
+                                      name: (identifier)
+                                      type: (expression
+                                          (unary_operation
+                                              (expression
+                                                  (identifier)))))
+                                  (struct_field
+                                      name: (identifier)
+                                      type: (expression
+                                          (identifier)))))))))))))

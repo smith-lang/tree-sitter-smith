@@ -7,8 +7,9 @@ positive int
 ---
 
 (source_file
-    (expr
-        (int)))
+  (statement
+    (expression
+      (integer_literal))))
 
 ==================
 negative int
@@ -19,10 +20,11 @@ negative int
 ---
 
 (source_file
-  (expr
-    (unary_op
-        (expr
-            (int)))))
+  (statement
+    (expression
+      (unary_operation
+          (expression
+              (integer_literal))))))
 
 ==================
 positive float
@@ -33,8 +35,9 @@ positive float
 ---
 
 (source_file
-    (expr
-        (float)))
+  (statement
+      (expression
+          (float_literal))))
 
 ==================
 negative float
@@ -45,10 +48,11 @@ negative float
 ---
 
 (source_file
-    (expr
-        (unary_op
-            (expr
-                (float)))))
+    (statement
+      (expression
+          (unary_operation
+              (expression
+                  (float_literal))))))
 
 ==================
 string
@@ -59,8 +63,9 @@ string
 ---
 
 (source_file
-    (expr
-        (str)))
+    (statement
+      (expression
+          (string_literal))))
 
 ==================
 boolean true
@@ -71,8 +76,9 @@ true
 ---
 
 (source_file
-    (expr
-        (bool)))
+    (statement
+      (expression
+          (boolean_literal))))
 
 ==================
 boolean false
@@ -83,8 +89,9 @@ false
 ---
 
 (source_file
-    (expr
-        (bool)))
+    (statement
+      (expression
+          (boolean_literal))))
 
 ==================
 nested unary
@@ -95,12 +102,13 @@ nested unary
 ---
 
 (source_file
-    (expr
-        (unary_op
-            (expr
-                (unary_op
-                    (expr
-                         (int)))))))
+    (statement
+      (expression
+          (unary_operation
+              (expression
+                  (unary_operation
+                      (expression
+                           (integer_literal))))))))
 
 
 ==================
@@ -112,10 +120,11 @@ not true
 ---
 
 (source_file
-    (expr
-        (unary_op
-            (expr
-                (bool)))))
+    (statement
+      (expression
+          (unary_operation
+              (expression
+                  (boolean_literal))))))
 
 ==================
 not operator with parentheses
@@ -126,16 +135,17 @@ not (5 > 3)
 ---
 
 (source_file
-    (expr
-        (unary_op
-            (expr
-                (paren
-                    (expr
-                        (binary_op
-                            left: (expr
-                                (int))
-                            right: (expr
-                                (int)))))))))
+    (statement
+      (expression
+          (unary_operation
+              (expression
+                  (parenthesized_expression
+                      (expression
+                          (binary_operation
+                              left: (expression
+                                  (integer_literal))
+                              right: (expression
+                                  (integer_literal))))))))))
 
 ==================
 nested not operator
@@ -146,12 +156,13 @@ not not false
 ---
 
 (source_file
-    (expr
-        (unary_op
-            (expr
-                (unary_op
-                    (expr
-                        (bool)))))))
+    (statement
+      (expression
+          (unary_operation
+              (expression
+                  (unary_operation
+                      (expression
+                          (boolean_literal))))))))
 
 ==================
 not operator with function call
@@ -162,12 +173,13 @@ not is_valid()
 ---
 
 (source_file
-    (expr
-        (unary_op
-            (expr
-                (call
-                    fn: (expr
-                        (symbol)))))))
+    (statement
+      (expression
+          (unary_operation
+              (expression
+                  (function_call
+                      function: (expression
+                          (identifier))))))))
 
 ==================
 array literal with no elements
@@ -178,8 +190,9 @@ array literal with no elements
 ---
 
 (source_file
-    (expr
-        (array)))
+    (statement
+      (expression
+          (array_literal))))
 
 
 ==================
@@ -191,10 +204,11 @@ array literal with one element
 ---
 
 (source_file
-    (expr
-        (array
-            (expr
-                (int)))))
+    (statement
+      (expression
+          (array_literal
+              (expression
+                  (integer_literal))))))
 
 ==================
 array literal with two elements
@@ -205,12 +219,13 @@ array literal with two elements
 ---
 
 (source_file
-    (expr
-        (array
-            (expr
-                (int))
-            (expr
-                (int)))))
+    (statement
+      (expression
+          (array_literal
+              (expression
+                  (integer_literal))
+              (expression
+                  (integer_literal))))))
 
 ==================
 array literal with trailing comma
@@ -221,12 +236,13 @@ array literal with trailing comma
 ---
 
 (source_file
-    (expr
-        (array
-            (expr
-                (int))
-            (expr
-                (int)))))
+    (statement
+      (expression
+          (array_literal
+              (expression
+                  (integer_literal))
+              (expression
+                  (integer_literal))))))
 
 
 ==================
@@ -239,20 +255,21 @@ nested array literal
 ---
 
 (source_file
-    (expr
-        (array
-            (expr
-                (array
-                    (expr
-                        (int))
-                    (expr
-                        (int))))
-            (expr
-                (array
-                    (expr
-                        (int))
-                    (expr
-                        (int)))))))
+    (statement
+      (expression
+          (array_literal
+              (expression
+                  (array_literal
+                      (expression
+                          (integer_literal))
+                      (expression
+                          (integer_literal))))
+              (expression
+                  (array_literal
+                      (expression
+                          (integer_literal))
+                      (expression
+                          (integer_literal))))))))
 
 ==================
 empty map
@@ -263,8 +280,9 @@ empty map
 ---
 
 (source_file
-    (expr
-        (map)))
+    (statement
+      (expression
+          (map_literal))))
 
 ==================
 map with one key value pair
@@ -275,13 +293,14 @@ map with one key value pair
 ---
 
 (source_file
-    (expr
-        (map
-            (pairs
-                (pair
-                    key: (symbol)
-                    value: (expr
-                        (int)))))))
+    (statement
+      (expression
+          (map_literal
+              (map_pairs
+                  (map_pair
+                      key: (identifier)
+                      value: (expression
+                          (integer_literal))))))))
 
 ==================
 map with two key value pairs
@@ -292,17 +311,18 @@ map with two key value pairs
 ---
 
 (source_file
-    (expr
-        (map
-            (pairs
-                (pair
-                    key: (symbol)
-                    value: (expr
-                        (str)))
-                (pair
-                    key: (symbol)
-                    value: (expr
-                        (int)))))))
+    (statement
+      (expression
+          (map_literal
+              (map_pairs
+                  (map_pair
+                      key: (identifier)
+                      value: (expression
+                          (string_literal)))
+                  (map_pair
+                      key: (identifier)
+                      value: (expression
+                          (integer_literal))))))))
 
 ==================
 map with trailing comma
@@ -313,17 +333,18 @@ map with trailing comma
 ---
 
 (source_file
-    (expr
-        (map
-            (pairs
-                (pair
-                    key: (symbol)
-                    value: (expr
-                        (str)))
-                (pair
-                    key: (symbol)
-                    value: (expr
-                        (int)))))))
+    (statement
+      (expression
+          (map_literal
+              (map_pairs
+                  (map_pair
+                      key: (identifier)
+                      value: (expression
+                          (string_literal)))
+                  (map_pair
+                      key: (identifier)
+                      value: (expression
+                          (integer_literal))))))))
 
 ==================
 empty tuple
@@ -334,8 +355,9 @@ empty tuple
 ---
 
 (source_file
-    (expr
-        (tuple)))
+    (statement
+      (expression
+          (tuple_literal))))
 
 ==================
 tuple with one element
@@ -346,10 +368,11 @@ tuple with one element
 ---
 
 (source_file
-    (expr
-        (tuple
-            (expr
-                (int)))))
+    (statement
+      (expression
+          (tuple_literal
+              (expression
+                  (integer_literal))))))
 
 ==================
 tuple with two elements
@@ -360,12 +383,13 @@ tuple with two elements
 ---
 
 (source_file
-    (expr
-        (tuple
-            (expr
-                (int))
-            (expr
-                (str)))))
+    (statement
+      (expression
+          (tuple_literal
+              (expression
+                  (integer_literal))
+              (expression
+                  (string_literal))))))
 
 ==================
 tuple with trailing comma
@@ -376,9 +400,10 @@ tuple with trailing comma
 ---
 
 (source_file
-    (expr
-        (tuple
-            (expr
-                (int))
-            (expr
-                (str)))))
+    (statement
+      (expression
+          (tuple_literal
+              (expression
+                  (integer_literal))
+              (expression
+                  (string_literal))))))
