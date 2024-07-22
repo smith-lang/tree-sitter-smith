@@ -502,6 +502,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "tuple_pattern",
+          "named": true
         }
       ]
     }
@@ -657,6 +661,21 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern_expression",
           "named": true
         }
       ]

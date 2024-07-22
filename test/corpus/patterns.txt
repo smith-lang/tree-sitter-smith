@@ -1,0 +1,58 @@
+==================
+variable definition with explicit type
+==================
+
+name: type = value
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (identifier))
+          type: (expression
+              (identifier))
+          value: (expression
+              (identifier)))))
+
+
+==================
+variable definition with inferred type
+==================
+
+name = value
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (identifier))
+          value: (expression
+              (identifier)))))
+
+==================
+tuple destructuring
+==================
+
+(x, y) = (1, 2)
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          pattern: (pattern_expression
+              (tuple_pattern
+                  (pattern_expression
+                      (identifier))
+                  (pattern_expression
+                      (identifier))))
+          value: (expression
+              (tuple_literal
+                  (expression
+                      (integer_literal))
+                  (expression
+                      (integer_literal)))))))
