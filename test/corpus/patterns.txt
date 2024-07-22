@@ -102,10 +102,10 @@ map destructuring
       (variable_definition
           pattern: (pattern_expression
               (map_pattern
-                  (pattern_expression
-                      (identifier))
-                  (pattern_expression
-                      (identifier))))
+                  (map_pattern_field
+                      key: (identifier))
+                  (map_pattern_field
+                      key: (identifier))))
           value: (expression
             (map_literal
               (map_pairs
@@ -117,3 +117,109 @@ map destructuring
                   key: (identifier)
                   value: (expression
                     (string_literal)))))))))
+
+==================
+nested map destructuring
+==================
+
+{name: {first, last}} = {name: {first: "John", last: "Doe"}}
+
+---
+
+    (source_file
+      (statement
+        (variable_definition
+          pattern: (pattern_expression
+            (map_pattern
+              (map_pattern_field
+                key: (identifier)
+                value: (pattern_expression
+                  (map_pattern
+                    (map_pattern_field
+                      key: (identifier))
+                    (map_pattern_field
+                      key: (identifier)))))))
+          value: (expression
+            (map_literal
+              (map_pairs
+                (map_pair
+                  key: (identifier)
+                  value: (expression
+                    (map_literal
+                      (map_pairs
+                        (map_pair
+                          key: (identifier)
+                          value: (expression
+                            (string_literal)))
+                        (map_pair
+                          key: (identifier)
+                          value: (expression
+                            (string_literal)))))))))))))
+
+==================
+tuple inside array
+==================
+
+[(x, y), z] = [(1, 2), (3, 4)]
+
+---
+
+    (source_file
+      (statement
+        (variable_definition
+          pattern: (pattern_expression
+            (array_pattern
+              (pattern_expression
+                (tuple_pattern
+                  (pattern_expression
+                    (identifier))
+                  (pattern_expression
+                    (identifier))))
+              (pattern_expression
+                (identifier))))
+          value: (expression
+            (array_literal
+              (expression
+                (tuple_literal
+                  (expression
+                    (integer_literal))
+                  (expression
+                    (integer_literal))))
+              (expression
+                (tuple_literal
+                  (expression
+                    (integer_literal))
+                  (expression
+                    (integer_literal)))))))))
+
+==================
+array inside tuple
+==================
+
+([x, y], z) = ([1, 2], 3)
+
+---
+
+    (source_file
+      (statement
+        (variable_definition
+          pattern: (pattern_expression
+            (tuple_pattern
+              (pattern_expression
+                (array_pattern
+                  (pattern_expression
+                    (identifier))
+                  (pattern_expression
+                    (identifier))))
+              (pattern_expression
+                (identifier))))
+          value: (expression
+            (tuple_literal
+              (expression
+                (array_literal
+                  (expression
+                    (integer_literal))
+                  (expression
+                    (integer_literal))))
+              (expression
+                (integer_literal)))))))

@@ -242,9 +242,17 @@ module.exports = grammar({
         seq(
           "{",
           optional(
-            seq($.pattern_expression, ",", repeat(seq($.pattern_expression, optional(",")))),
+            seq($.map_pattern_field, repeat(seq(",", $.map_pattern_field)), optional(",")),
           ),
           "}",
+        ),
+      ),
+
+    map_pattern_field: ($) =>
+      prec(10,
+        seq(
+          field("key", $.identifier),
+          optional(seq(":", field("value", $.pattern_expression))),
         ),
       ),
 

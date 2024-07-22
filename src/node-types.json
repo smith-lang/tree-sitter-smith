@@ -500,10 +500,36 @@
       "required": false,
       "types": [
         {
-          "type": "pattern_expression",
+          "type": "map_pattern_field",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "map_pattern_field",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "pattern_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
