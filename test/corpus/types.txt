@@ -23,6 +23,7 @@ pointer type
     (statement
       (expression
           (unary_operation
+              (pointer)
               (expression
                   (identifier))))))
 
@@ -38,6 +39,7 @@ optional type
     (statement
       (expression
           (unary_operation
+              (option)
               (expression
                   (identifier))))))
 
@@ -97,7 +99,7 @@ map type
 union type
 ==================
 
-i32 | str
+i32 or str
 
 ---
 
@@ -107,6 +109,7 @@ i32 | str
           (binary_operation
               left: (expression
                   (identifier))
+              operator: (or)
               right: (expression
                   (identifier))))))
 

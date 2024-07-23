@@ -265,11 +265,14 @@ square = fn((x, y): (i32, i32)) i32 {
                         (binary_operation
                           left: (expression
                             (identifier))
+                          operator: (multiply)
                           right: (expression
                             (identifier))))
+                      operator: (add)
                       right: (expression
                         (binary_operation
                           left: (expression
                             (identifier))
+                          operator: (multiply)
                           right: (expression
                             (identifier)))))))))))))

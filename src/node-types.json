@@ -48,32 +48,32 @@
         "required": true,
         "types": [
           {
-            "type": "*",
-            "named": false
+            "type": "add",
+            "named": true
           },
           {
-            "type": "+",
-            "named": false
+            "type": "divide",
+            "named": true
           },
           {
-            "type": "-",
-            "named": false
+            "type": "greater",
+            "named": true
           },
           {
-            "type": "/",
-            "named": false
+            "type": "less",
+            "named": true
           },
           {
-            "type": "<",
-            "named": false
+            "type": "multiply",
+            "named": true
           },
           {
-            "type": ">",
-            "named": false
+            "type": "or",
+            "named": true
           },
           {
-            "type": "|",
-            "named": false
+            "type": "subtract",
+            "named": true
           }
         ]
       },
@@ -533,6 +533,16 @@
     }
   },
   {
+    "type": "multiply",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "negative",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "parenthesized_expression",
     "named": true,
     "fields": {},
@@ -573,6 +583,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "pointer",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "range_expression",
@@ -716,6 +731,11 @@
     }
   },
   {
+    "type": "subtract",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "tuple_literal",
     "named": true,
     "fields": {},
@@ -759,6 +779,22 @@
         },
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "negative",
+          "named": true
+        },
+        {
+          "type": "not",
+          "named": true
+        },
+        {
+          "type": "option",
+          "named": true
+        },
+        {
+          "type": "pointer",
           "named": true
         }
       ]
@@ -813,10 +849,6 @@
     "named": false
   },
   {
-    "type": "+",
-    "named": false
-  },
-  {
     "type": ",",
     "named": false
   },
@@ -841,27 +873,11 @@
     "named": false
   },
   {
-    "type": "/",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
   {
-    "type": "<",
-    "named": false
-  },
-  {
     "type": "=",
-    "named": false
-  },
-  {
-    "type": ">",
-    "named": false
-  },
-  {
-    "type": "?",
     "named": false
   },
   {
@@ -871,6 +887,14 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "add",
+    "named": true
+  },
+  {
+    "type": "divide",
+    "named": true
   },
   {
     "type": "else",
@@ -897,6 +921,10 @@
     "named": false
   },
   {
+    "type": "greater",
+    "named": true
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -913,8 +941,20 @@
     "named": true
   },
   {
+    "type": "less",
+    "named": true
+  },
+  {
     "type": "not",
-    "named": false
+    "named": true
+  },
+  {
+    "type": "option",
+    "named": true
+  },
+  {
+    "type": "or",
+    "named": true
   },
   {
     "type": "string_literal",
@@ -930,10 +970,6 @@
   },
   {
     "type": "{",
-    "named": false
-  },
-  {
-    "type": "|",
     "named": false
   },
   {

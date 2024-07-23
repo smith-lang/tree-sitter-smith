@@ -30,16 +30,24 @@ module.exports = grammar({
         $.range_expression,
       ),
 
+    or: () => "or",
+    greater: () => ">",
+    less: () => "<",
+    add: () => "+",
+    subtract: () => "-",
+    multiply: () => "*",
+    divide: () => "/",
+
     binary_operation: ($) =>
       choice(
         ...[
-          ["|", 2],
-          [">", 2],
-          ["<", 2],
-          ["+", 3],
-          ["-", 3],
-          ["*", 4],
-          ["/", 4],
+          [$.or, 2],
+          [$.greater, 2],
+          [$.less, 2],
+          [$.add, 3],
+          [$.subtract, 3],
+          [$.multiply, 4],
+          [$.divide, 4],
         ].map(([operator, precedence]) =>
           prec.left(
             precedence,
@@ -52,14 +60,19 @@ module.exports = grammar({
         ),
       ),
 
+    negative: () => "-",
+    not: () => "not",
+    pointer: () => "*",
+    option: () => "?",
+
     unary_operation: ($) =>
       prec(
         8,
         choice(
-          seq("-", $.expression),
-          seq("not", $.expression),
-          seq("*", $.expression),
-          seq("?", $.expression),
+          seq($.negative, $.expression),
+          seq($.not, $.expression),
+          seq($.pointer, $.expression),
+          seq($.option, $.expression),
           seq($.array_literal, $.expression),
         ),
       ),
@@ -216,46 +229,66 @@ module.exports = grammar({
       ),
 
     tuple_pattern: ($) =>
-      prec(10,
+      prec(
+        10,
         seq(
           "(",
           optional(
-            seq($.pattern_expression, ",", repeat(seq($.pattern_expression, optional(",")))),
+            seq(
+              $.pattern_expression,
+              ",",
+              repeat(seq($.pattern_expression, optional(","))),
+            ),
           ),
           ")",
         ),
       ),
 
     array_pattern: ($) =>
-      prec(10,
+      prec(
+        10,
         seq(
           "[",
           optional(
-            seq($.pattern_expression, ",", repeat(seq($.pattern_expression, optional(",")))),
+            seq(
+              $.pattern_expression,
+              ",",
+              repeat(seq($.pattern_expression, optional(","))),
+            ),
           ),
           "]",
         ),
       ),
 
     map_pattern: ($) =>
-      prec(10,
+      prec(
+        10,
         seq(
           "{",
           optional(
-            seq($.map_pattern_field, repeat(seq(",", $.map_pattern_field)), optional(",")),
+            seq(
+              $.map_pattern_field,
+              repeat(seq(",", $.map_pattern_field)),
+              optional(","),
+            ),
           ),
           "}",
         ),
       ),
 
     map_pattern_field: ($) =>
-      prec(10,
+      prec(
+        10,
         seq(
           field("key", $.identifier),
           optional(seq(":", field("value", $.pattern_expression))),
         ),
       ),
 
-    pattern_expression: ($) => prec(10, choice($.identifier, $.tuple_pattern, $.array_pattern, $.map_pattern)),
+    pattern_expression: ($) =>
+      prec(
+        10,
+        choice($.identifier, $.tuple_pattern, $.array_pattern, $.map_pattern),
+      ),
   },
 });

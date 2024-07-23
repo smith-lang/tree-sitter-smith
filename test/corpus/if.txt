@@ -63,6 +63,7 @@ if x > 3 { 1 } else { 2 }
                   (binary_operation
                       left: (expression
                           (identifier))
+                      operator: (greater)
                       right: (expression
                           (integer_literal))))
               then: (block
@@ -96,6 +97,7 @@ if x > 3 {
                   (binary_operation
                       left: (expression
                           (identifier))
+                      operator: (greater)
                       right: (expression
                           (integer_literal))))
               then: (block
@@ -112,6 +114,7 @@ if x > 3 {
                       (binary_operation
                           left: (expression
                               (identifier))
+                          operator: (less)
                           right: (expression
                               (integer_literal))))
                   then: (block
@@ -157,6 +160,7 @@ if x > 100 {
                   (binary_operation
                       left: (expression
                           (identifier))
+                      operator: (greater)
                       right: (expression
                           (integer_literal))))
               then: (block
@@ -173,6 +177,7 @@ if x > 100 {
                       (binary_operation
                           left: (expression
                               (identifier))
+                          operator: (greater)
                           right: (expression
                               (integer_literal))))
                   then: (block
@@ -189,6 +194,7 @@ if x > 100 {
                       (binary_operation
                           left: (expression
                               (identifier))
+                          operator: (greater)
                           right: (expression
                               (integer_literal))))
                   then: (block

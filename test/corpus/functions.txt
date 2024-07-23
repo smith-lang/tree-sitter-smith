@@ -88,6 +88,7 @@ add = fn(x: i32, y: i32) i32 {
                             (binary_operation
                                 left: (expression
                                     (identifier))
+                                operator: (add)
                                 right: (expression
                                     (identifier)))))))))))
 
@@ -168,6 +169,7 @@ sum_of_squares = fn(x: i32, y: i32) i32 {
                                 (binary_operation
                                     left: (expression
                                         (identifier))
+                                    operator: (multiply)
                                     right: (expression
                                         (identifier))))))
                   (statement
@@ -178,6 +180,7 @@ sum_of_squares = fn(x: i32, y: i32) i32 {
                               (binary_operation
                                   left: (expression
                                       (identifier))
+                                  operator: (multiply)
                                   right: (expression
                                       (identifier))))))
                   (statement
@@ -185,6 +188,7 @@ sum_of_squares = fn(x: i32, y: i32) i32 {
                         (binary_operation
                             left: (expression
                                 (identifier))
+                            operator: (add)
                             right: (expression
                                 (identifier)))))))))))
 

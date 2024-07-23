@@ -12,10 +12,12 @@ Addition and multiplication
       (binary_operation
         left: (expression
           (integer_literal))
+        operator: (add)
         right: (expression
           (binary_operation
             left: (expression
               (integer_literal))
+            operator: (multiply)
             right: (expression
               (integer_literal))))))))
 
@@ -35,8 +37,10 @@ Multiplication and addition
           (binary_operation
             left: (expression
               (integer_literal))
+            operator: (multiply)
             right: (expression
               (integer_literal))))
+        operator: (add)
         right: (expression
           (integer_literal))))))
 
@@ -56,16 +60,20 @@ Multiple operations
           (binary_operation
             left: (expression
               (integer_literal))
+            operator: (add)
             right: (expression
               (binary_operation
                 left: (expression
                   (integer_literal))
+                operator: (multiply)
                 right: (expression
                   (integer_literal))))))
+        operator: (subtract)
         right: (expression
           (binary_operation
             left: (expression
               (integer_literal))
+            operator: (divide)
             right: (expression
               (integer_literal))))))))
 
@@ -87,8 +95,10 @@ Parentheses overriding precedence
               (binary_operation
                 left: (expression
                   (integer_literal))
+                operator: (add)
                 right: (expression
                   (integer_literal))))))
+        operator: (multiply)
         right: (expression
           (integer_literal))))))
 
@@ -110,14 +120,18 @@ Mixed operators with floats
               (binary_operation
                 left: (expression
                   (float_literal))
+                operator: (multiply)
                 right: (expression
                   (float_literal))))
+            operator: (add)
             right: (expression
               (binary_operation
                 left: (expression
                   (float_literal))
+                operator: (divide)
                 right: (expression
                   (float_literal))))))
+        operator: (subtract)
         right: (expression
           (float_literal))))))
 
@@ -135,8 +149,10 @@ Unary operator with multiplication
       (binary_operation
         left: (expression
           (unary_operation
+            (negative)
             (expression
               (integer_literal))))
+        operator: (multiply)
         right: (expression
           (integer_literal))))))
 
@@ -162,9 +178,12 @@ Nested parentheses
                       (binary_operation
                         left: (expression
                           (integer_literal))
+                        operator: (add)
                         right: (expression
                           (integer_literal))))))
+                operator: (multiply)
                 right: (expression
                   (integer_literal))))))
+        operator: (add)
         right: (expression
           (integer_literal))))))
