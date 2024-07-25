@@ -127,6 +127,7 @@ Slice = fn(T: type) type {
                                       name: (identifier)
                                       type: (expression
                                           (unary_operation
+                                              (pointer)
                                               (expression
                                                   (identifier)))))
                                   (struct_field

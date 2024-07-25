@@ -1,0 +1,35 @@
+==================
+comment at top level
+==================
+
+# here is a comment
+
+---
+
+(source_file
+    (comment))
+
+==================
+comment during function definition
+==================
+
+main = fn() i32 { # here is a comment
+    42
+}
+
+---
+
+(source_file
+    (statement
+        (variable_definition
+            (pattern_expression
+                (identifier))
+            (expression
+                (function_definition
+                    (expression
+                        (identifier))
+                    (block
+                        (comment)
+                        (statement
+                            (expression
+                            (integer_literal)))))))))

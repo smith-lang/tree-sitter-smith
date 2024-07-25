@@ -23,6 +23,7 @@ negative int
   (statement
     (expression
       (unary_operation
+          (negative)
           (expression
               (integer_literal))))))
 
@@ -51,6 +52,7 @@ negative float
     (statement
       (expression
           (unary_operation
+              (negative)
               (expression
                   (float_literal))))))
 
@@ -105,8 +107,10 @@ nested unary
     (statement
       (expression
           (unary_operation
+              (negative)
               (expression
                   (unary_operation
+                      (negative)
                       (expression
                            (integer_literal))))))))
 
@@ -123,6 +127,7 @@ not true
     (statement
       (expression
           (unary_operation
+              (not)
               (expression
                   (boolean_literal))))))
 
@@ -138,12 +143,14 @@ not (5 > 3)
     (statement
       (expression
           (unary_operation
+              (not)
               (expression
                   (parenthesized_expression
                       (expression
                           (binary_operation
                               left: (expression
                                   (integer_literal))
+                              operator: (greater)
                               right: (expression
                                   (integer_literal))))))))))
 
@@ -159,8 +166,10 @@ not not false
     (statement
       (expression
           (unary_operation
+              (not)
               (expression
                   (unary_operation
+                      (not)
                       (expression
                           (boolean_literal))))))))
 
@@ -176,6 +185,7 @@ not is_valid()
     (statement
       (expression
           (unary_operation
+              (not)
               (expression
                   (function_call
                       function: (expression
