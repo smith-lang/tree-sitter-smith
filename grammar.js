@@ -1,12 +1,14 @@
 module.exports = grammar({
   name: "smith",
 
+  extras: ($) => [$.comment, /[\s\f\uFEFF\u2060\u200B]|\r?\n/],
+
   word: ($) => $.identifier,
 
   rules: {
     source_file: ($) => repeat($.statement),
 
-    statement: ($) => choice($.variable_definition, $.expression),
+    statement: ($) => choice($.expression, $.variable_definition, $.test),
 
     expression: ($) =>
       choice(
@@ -33,10 +35,14 @@ module.exports = grammar({
     or: () => "or",
     greater: () => ">",
     less: () => "<",
+    equal: () => "==",
+    add_assign: () => "+=",
     add: () => "+",
     subtract: () => "-",
     multiply: () => "*",
     divide: () => "/",
+    in: () => "in",
+    dot: () => ".",
 
     binary_operation: ($) =>
       choice(
@@ -44,10 +50,14 @@ module.exports = grammar({
           [$.or, 2],
           [$.greater, 2],
           [$.less, 2],
+          [$.equal, 2],
+          [$.add_assign, 2],
           [$.add, 3],
           [$.subtract, 3],
           [$.multiply, 4],
           [$.divide, 4],
+          [$.in, 5],
+          [$.dot, 6],
         ].map(([operator, precedence]) =>
           prec.left(
             precedence,
@@ -122,17 +132,6 @@ module.exports = grammar({
           "(",
           optional(field("arguments", $.function_arguments)),
           ")",
-        ),
-      ),
-
-    variable_definition: ($) =>
-      prec.right(
-        1,
-        seq(
-          field("pattern", $.pattern_expression),
-          optional(seq(":", field("type", $.expression))),
-          "=",
-          field("value", $.expression),
         ),
       ),
 
@@ -290,5 +289,24 @@ module.exports = grammar({
         10,
         choice($.identifier, $.tuple_pattern, $.array_pattern, $.map_pattern),
       ),
+
+    mut: () => "mut",
+
+    variable_definition: ($) =>
+      prec(
+        1,
+        seq(
+          optional(field("mut", $.mut)),
+          field("pattern", $.pattern_expression),
+          optional(seq(":", field("type", $.expression))),
+          "=",
+          field("value", $.expression),
+        ),
+      ),
+
+    test: ($) =>
+      seq("test", field("name", $.string_literal), field("body", $.block)),
+
+    comment: ($) => token(seq("#", /.*/)),
   },
 });

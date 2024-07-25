@@ -276,3 +276,22 @@ square = fn((x, y): (i32, i32)) i32 {
                           operator: (multiply)
                           right: (expression
                             (identifier)))))))))))))
+
+==================
+mutable variable definition with explicit type
+==================
+
+mut name: type = value
+
+---
+
+(source_file
+    (statement
+      (variable_definition
+          mut: (mut)
+          pattern: (pattern_expression
+              (identifier))
+          type: (expression
+              (identifier))
+          value: (expression
+              (identifier)))))

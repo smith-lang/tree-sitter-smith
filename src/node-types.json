@@ -52,11 +52,27 @@
             "named": true
           },
           {
+            "type": "add_assign",
+            "named": true
+          },
+          {
             "type": "divide",
             "named": true
           },
           {
+            "type": "dot",
+            "named": true
+          },
+          {
+            "type": "equal",
+            "named": true
+          },
+          {
             "type": "greater",
+            "named": true
+          },
+          {
+            "type": "in",
             "named": true
           },
           {
@@ -402,6 +418,11 @@
     }
   },
   {
+    "type": "in",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "index_expression",
     "named": true,
     "fields": {},
@@ -668,6 +689,10 @@
           "named": true
         },
         {
+          "type": "test",
+          "named": true
+        },
+        {
           "type": "variable_definition",
           "named": true
         }
@@ -734,6 +759,32 @@
     "type": "subtract",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "test",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "tuple_literal",
@@ -804,6 +855,16 @@
     "type": "variable_definition",
     "named": true,
     "fields": {
+      "mut": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "mut",
+            "named": true
+          }
+        ]
+      },
       "pattern": {
         "multiple": false,
         "required": true,
@@ -893,7 +954,19 @@
     "named": true
   },
   {
+    "type": "add_assign",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "divide",
+    "named": true
+  },
+  {
+    "type": "dot",
     "named": true
   },
   {
@@ -903,6 +976,10 @@
   {
     "type": "else if",
     "named": false
+  },
+  {
+    "type": "equal",
+    "named": true
   },
   {
     "type": "false",
@@ -945,6 +1022,10 @@
     "named": true
   },
   {
+    "type": "mut",
+    "named": true
+  },
+  {
     "type": "not",
     "named": true
   },
@@ -962,6 +1043,10 @@
   },
   {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "test",
     "named": false
   },
   {

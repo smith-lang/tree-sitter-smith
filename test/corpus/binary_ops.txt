@@ -187,3 +187,97 @@ Nested parentheses
         operator: (add)
         right: (expression
           (integer_literal))))))
+
+==================
+Or operator
+==================
+
+true or false
+
+---
+
+(source_file
+    (statement
+        (expression
+            (binary_operation
+                left: (expression
+                    (boolean_literal))
+                operator: (or)
+                right: (expression
+                    (boolean_literal))))))
+
+==================
+In operator
+==================
+
+x in [1, 2]
+
+---
+
+(source_file
+    (statement
+        (expression
+            (binary_operation
+                left: (expression
+                    (identifier))
+                operator: (in)
+                right: (expression
+                    (array_literal
+                        (expression
+                            (integer_literal))
+                        (expression
+                            (integer_literal))))))))
+
+==================
+Equal operator
+==================
+
+x == 5
+
+---
+
+(source_file
+    (statement
+        (expression
+            (binary_operation
+                left: (expression
+                    (identifier))
+                operator: (equal)
+                right: (expression
+                    (integer_literal))))))
+
+==================
+Add assign operator
+==================
+
+x += 5
+
+---
+
+(source_file
+    (statement
+        (expression
+            (binary_operation
+                left: (expression
+                    (identifier))
+                operator: (add_assign)
+                right: (expression
+                    (integer_literal))))))
+
+==================
+Field access
+==================
+
+rectangle.width
+
+---
+
+(source_file
+    (statement
+        (expression
+            (binary_operation
+                left: (expression
+                    (identifier))
+                operator: (dot)
+                right: (expression
+                    (identifier))))))
