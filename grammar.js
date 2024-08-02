@@ -8,7 +8,8 @@ module.exports = grammar({
   rules: {
     source_file: ($) => repeat($.statement),
 
-    statement: ($) => choice($.expression, $.variable_definition, $.test),
+    statement: ($) =>
+      choice($.expression, $.variable_definition, $.test, $.assert, $.return),
 
     expression: ($) =>
       choice(
@@ -109,7 +110,7 @@ module.exports = grammar({
     function_parameters: ($) =>
       seq($.function_parameter, repeat(seq(",", $.function_parameter))),
 
-    block: ($) => seq("{", repeat($.statement), "}"),
+    block: ($) => prec(1, seq("{", repeat($.statement), "}")),
 
     function_definition: ($) =>
       seq(
@@ -117,7 +118,7 @@ module.exports = grammar({
         "(",
         optional(field("parameters", $.function_parameters)),
         ")",
-        field("return_type", $.expression),
+        optional(field("return_type", $.expression)),
         field("body", $.block),
       ),
 
@@ -154,9 +155,12 @@ module.exports = grammar({
       ),
 
     map_pair: ($) =>
-      seq(
-        field("key", $.identifier),
-        optional(seq(":", field("value", $.expression))),
+      prec(
+        1,
+        seq(
+          field("key", $.identifier),
+          optional(seq(":", field("value", $.expression))),
+        ),
       ),
 
     map_pairs: ($) =>
@@ -199,32 +203,14 @@ module.exports = grammar({
     index_expression: ($) =>
       prec.left(9, seq($.expression, "[", $.expression, "]")),
 
-    range_type: () => choice("..=", "..>", "..<"),
-
     range_expression: ($) =>
-      choice(
-        seq(
-          "[",
-          field("first", $.expression),
-          optional(seq(",", field("second", $.expression))),
-          field("range_type", $.range_type),
-          field("last", $.expression),
-          "]",
-        ),
-        seq(
-          "[",
-          field("first", $.expression),
-          optional(seq(",", field("second", $.expression))),
-          "..",
-          "]",
-        ),
-        seq(
-          "[",
-          field("range_type", $.range_type),
-          field("last", $.expression),
-          "]",
-        ),
-        seq("[", "..", "]"),
+      seq(
+        "[",
+        optional(field("first", $.expression)),
+        optional(seq(",", field("second", $.expression))),
+        "..",
+        optional(field("last", $.expression)),
+        "]",
       ),
 
     tuple_pattern: ($) =>
@@ -306,6 +292,10 @@ module.exports = grammar({
 
     test: ($) =>
       seq("test", field("name", $.string_literal), field("body", $.block)),
+
+    assert: ($) => seq("assert", field("condition", $.expression)),
+
+    return: ($) => prec.right(1, seq("return", optional($.expression))),
 
     comment: ($) => token(seq("#", /.*/)),
   },
