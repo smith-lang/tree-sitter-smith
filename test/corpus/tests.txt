@@ -1,0 +1,31 @@
+==================
+unit test
+==================
+
+test "add" {
+    assert(1 + 2 == 3)
+}
+
+---
+
+(source_file
+  (statement
+    (test_statement
+      name: (string_literal)
+      body: (block
+        (statement
+          (assert_statement
+            (expression
+              (parenthesized_expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (binary_operation
+                        left: (expression
+                          (integer_literal))
+                        operator: (add)
+                        right: (expression
+                          (integer_literal))))
+                    operator: (equal)
+                    right: (expression
+                      (integer_literal))))))))))))
