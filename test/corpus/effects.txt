@@ -1,0 +1,28 @@
+==================
+assert
+==================
+
+assert true
+
+---
+
+(source_file
+  (statement
+    (assert
+      (expression
+        (boolean_literal)))))
+
+
+==================
+return
+==================
+
+return 42
+
+---
+
+(source_file
+  (statement
+    (return
+      (expression
+        (integer_literal)))))

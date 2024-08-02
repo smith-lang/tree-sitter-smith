@@ -89,7 +89,7 @@ for i, j, { mat[j][i] }
 for expression with range
 ==================
 
-for i in [1..=10] { print(i) }
+for i in [1..10] { print(i) }
 
 ---
 
@@ -103,7 +103,6 @@ for i in [1..=10] { print(i) }
                       (range_expression
                           first: (expression
                               (integer_literal))
-                          range_type: (range_type)
                           last: (expression
                               (integer_literal)))))
               (block
@@ -120,7 +119,7 @@ for i in [1..=10] { print(i) }
 for expression with multiple ranges
 ==================
 
-for i in [1..=10], j in [1..=10] {
+for i in [1..10], j in [1..10] {
     print(i * j)
 }
 
@@ -136,7 +135,6 @@ for i in [1..=10], j in [1..=10] {
                       (range_expression
                           first: (expression
                               (integer_literal))
-                          range_type: (range_type)
                           last: (expression
                               (integer_literal)))))
               (index_variable
@@ -145,7 +143,6 @@ for i in [1..=10], j in [1..=10] {
                       (range_expression
                           first: (expression
                               (integer_literal))
-                          range_type: (range_type)
                           last: (expression
                               (integer_literal)))))
               (block

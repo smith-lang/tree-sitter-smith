@@ -1,8 +1,8 @@
 ==================
-range with first..=last
+range with first..last
 ==================
 
-[1..=10]
+[1..10]
 
 ---
 
@@ -12,15 +12,14 @@ range with first..=last
           (range_expression
               first: (expression
                   (integer_literal))
-              range_type: (range_type)
               last: (expression
                   (integer_literal))))))
 
 ==================
-range expression with first,second..=last
+range expression with first,second..last
 ==================
 
-[1,3..=9]
+[1,3..9]
 
 ---
 
@@ -32,15 +31,14 @@ range expression with first,second..=last
                   (integer_literal))
               second: (expression
                   (integer_literal))
-              range_type: (range_type)
               last: (expression
                   (integer_literal))))))
 
 ==================
-range expression with first..<last
+range expression with big..small
 ==================
 
-[1..<10]
+[10..1]
 
 ---
 
@@ -50,53 +48,14 @@ range expression with first..<last
           (range_expression
               first: (expression
                   (integer_literal))
-              range_type: (range_type)
               last: (expression
                   (integer_literal))))))
 
 ==================
-range expression with first,second..<last
+range expression with big,second..last
 ==================
 
-[1,3..<9]
-
----
-
-(source_file
-    (statement
-      (expression
-          (range_expression
-              first: (expression
-                  (integer_literal))
-              second: (expression
-                  (integer_literal))
-              range_type: (range_type)
-              last: (expression
-                  (integer_literal))))))
-
-==================
-range expression with first..>last
-==================
-
-[10..>1]
-
----
-
-(source_file
-    (statement
-      (expression
-          (range_expression
-              first: (expression
-                  (integer_literal))
-              range_type: (range_type)
-              last: (expression
-                  (integer_literal))))))
-
-==================
-range expression with first,second..>last
-==================
-
-[10,8..>1]
+[10,8..1]
 
 ---
 
@@ -108,7 +67,6 @@ range expression with first,second..>last
                   (integer_literal))
               second: (expression
                   (integer_literal))
-              range_type: (range_type)
               last: (expression
                   (integer_literal))))))
 
@@ -145,10 +103,10 @@ range expression with first, second..
                   (integer_literal))))))
 
 ==================
-range expression with ..=last
+range expression with ..last
 ==================
 
-[..=10]
+[..10]
 
 ---
 
@@ -156,26 +114,8 @@ range expression with ..=last
     (statement
       (expression
           (range_expression
-              range_type: (range_type)
               last: (expression
                   (integer_literal))))))
-
-==================
-range expression with ..<last
-==================
-
-[..<10]
-
----
-
-(source_file
-    (statement
-      (expression
-          (range_expression
-              range_type: (range_type)
-              last: (expression
-                  (integer_literal))))))
-
 
 ==================
 range expression with ..

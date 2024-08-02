@@ -266,3 +266,30 @@ add(5, 3,)
               (integer_literal))
             (expression
               (integer_literal)))))))
+
+==================
+Function definition with no return type
+==================
+
+main = fn() {
+    print("hello world")
+}
+
+---
+
+(source_file
+  (statement
+    (variable_definition
+      (pattern_expression
+        (identifier))
+      (expression
+        (function_definition
+          (block
+            (statement
+              (expression
+                (function_call
+                  (expression
+                    (identifier))
+                  (function_arguments
+                    (expression
+                      (string_literal))))))))))))
