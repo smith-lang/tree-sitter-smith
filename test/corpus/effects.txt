@@ -8,7 +8,7 @@ assert true
 
 (source_file
   (statement
-    (assert
+    (assert_statement
       (expression
         (boolean_literal)))))
 
@@ -23,6 +23,6 @@ return 42
 
 (source_file
   (statement
-    (return
+    (return_statement
       (expression
         (integer_literal)))))

@@ -9,7 +9,13 @@ module.exports = grammar({
     source_file: ($) => repeat($.statement),
 
     statement: ($) =>
-      choice($.expression, $.variable_definition, $.test, $.assert, $.return),
+      choice(
+        $.expression,
+        $.variable_definition,
+        $.test_statement,
+        $.assert_statement,
+        $.return_statement,
+      ),
 
     expression: ($) =>
       choice(
@@ -290,12 +296,13 @@ module.exports = grammar({
         ),
       ),
 
-    test: ($) =>
+    test_statement: ($) =>
       seq("test", field("name", $.string_literal), field("body", $.block)),
 
-    assert: ($) => seq("assert", field("condition", $.expression)),
+    assert_statement: ($) => seq("assert", $.expression),
 
-    return: ($) => prec.right(1, seq("return", optional($.expression))),
+    return_statement: ($) =>
+      prec.right(1, seq("return", optional($.expression))),
 
     comment: ($) => token(seq("#", /.*/)),
   },

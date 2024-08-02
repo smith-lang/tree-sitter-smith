@@ -22,15 +22,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "test"
+          "name": "test_statement"
         },
         {
           "type": "SYMBOL",
-          "name": "assert"
+          "name": "assert_statement"
         },
         {
           "type": "SYMBOL",
-          "name": "return"
+          "name": "return_statement"
         }
       ]
     },
@@ -1757,7 +1757,7 @@
         ]
       }
     },
-    "test": {
+    "test_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -1782,7 +1782,7 @@
         }
       ]
     },
-    "assert": {
+    "assert_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -1790,16 +1790,12 @@
           "value": "assert"
         },
         {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "expression"
-          }
+          "type": "SYMBOL",
+          "name": "expression"
         }
       ]
     },
-    "return": {
+    "return_statement": {
       "type": "PREC_RIGHT",
       "value": 1,
       "content": {
